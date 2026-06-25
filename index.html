@@ -3,29 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PAGODA GYM — Aquí No Entrenas Solo</title>
+  <title>PAGODA FITNESS CENTER — Aquí No Entrenas Solo</title>
   <meta name="description" content="No somos el gimnasio más grande. Somos el gimnasio donde te conocen, te apoyan y te ayudan a convertirte en tu mejor versión." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════════
      NAV
-============================================================ -->
+══════════════════════════════════════════ -->
 <nav class="nav" id="nav">
   <div class="nav__inner container">
-    <a href="#" class="nav__logo">PAGODA<span class="red">GYM</span></a>
+    <a href="#" class="nav__logo">
+      <img src="assets/logo.png" alt="Pagoda Fitness Center" class="nav__logo-img" />
+    </a>
     <ul class="nav__links">
       <li><a href="#beneficios">Beneficios</a></li>
       <li><a href="#entrenadores">Coaches</a></li>
       <li><a href="#transformaciones">Transformaciones</a></li>
-      <li><a href="#precios">Precios</a></li>
-      <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#precios">Planes</a></li>
     </ul>
-    <a href="https://wa.me/1234567890?text=Hola%2C%20quiero%20información%20sobre%20Pagoda%20Gym" class="btn btn--red nav__cta" target="_blank">WhatsApp</a>
+    <a href="https://wa.me/1234567890?text=Hola%2C%20quiero%20información%20sobre%20Pagoda%20Fitness" class="btn btn--red nav__cta" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
     <button class="nav__burger" id="burger" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
@@ -34,307 +38,392 @@
     <a href="#beneficios">Beneficios</a>
     <a href="#entrenadores">Coaches</a>
     <a href="#transformaciones">Transformaciones</a>
-    <a href="#precios">Precios</a>
-    <a href="#horarios">Horarios</a>
+    <a href="#precios">Planes</a>
     <a href="https://wa.me/1234567890" class="btn btn--red" target="_blank">WhatsApp</a>
   </div>
 </nav>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════════
      HERO
-============================================================ -->
+══════════════════════════════════════════ -->
 <section class="hero" id="inicio">
+  <!-- Fondo con textura -->
   <div class="hero__bg">
-    <div class="hero__overlay"></div>
-    <div class="hero__noise"></div>
+    <img
+      src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80&fm=webp"
+      alt="" class="hero__bg-img" />
+    <div class="hero__bg-overlay"></div>
+    <div class="hero__texture"></div>
   </div>
+
+  <!-- Líneas verticales estilo pagoda -->
+  <div class="hero__verticals" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- Sello asiático decorativo -->
+  <div class="hero__seal" aria-hidden="true">力</div>
+
   <div class="hero__content container">
-    <div class="hero__badge reveal">
+    <div class="hero__badge js-reveal-fade">
       <span class="pulse-dot"></span>
-      Más de 300 miembros activos
+      Más de 300 guerreros activos
     </div>
-    <h1 class="hero__title reveal delay-1">
-      AQUÍ NO<br /><span class="red stroke">ENTRENAS</span><br />SOLO
+
+    <!-- Título con split-text animado -->
+    <h1 class="hero__title">
+      <span class="js-split-word" data-delay="0">AQUÍ</span>
+      <span class="js-split-word hero__title--stroke" data-delay="120">NO</span>
+      <span class="js-split-word" data-delay="240">ENTRENAS</span>
+      <span class="js-split-word hero__title--outline" data-delay="360">SOLO</span>
     </h1>
-    <p class="hero__sub reveal delay-2">
+
+    <p class="hero__sub js-reveal-up" data-delay="500">
       No somos el gimnasio más grande.<br />
       Somos el gimnasio donde <strong>te conocen, te apoyan</strong><br />
       y te ayudan a convertirte en tu mejor versión.
     </p>
-    <div class="hero__ctas reveal delay-3">
-      <a href="#precios" class="btn btn--red btn--lg">Agenda tu visita</a>
-      <a href="https://wa.me/1234567890?text=Hola%2C%20quiero%20información%20sobre%20Pagoda%20Gym" class="btn btn--outline btn--lg" target="_blank">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+    <div class="hero__ctas js-reveal-up" data-delay="650">
+      <a href="#precios" class="btn btn--red btn--lg">
+        Agenda tu visita gratis
+        <span class="btn__arrow">→</span>
+      </a>
+      <a href="https://wa.me/1234567890?text=Hola%2C%20vengo%20de%20la%20web%20de%20Pagoda%20Fitness" class="btn btn--ghost btn--lg" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Escríbenos por WhatsApp
       </a>
     </div>
-    <div class="hero__stats reveal delay-4">
+
+    <div class="hero__stats js-reveal-up" data-delay="800">
       <div class="stat">
-        <span class="stat__num">300<span class="red">+</span></span>
-        <span class="stat__label">Miembros</span>
+        <span class="stat__num js-counter" data-target="300">0</span><span class="red">+</span>
+        <span class="stat__label">Guerreros</span>
       </div>
-      <div class="stat__divider"></div>
+      <div class="stat__line"></div>
       <div class="stat">
-        <span class="stat__num">5<span class="red">★</span></span>
+        <span class="stat__num">5</span><span class="red">★</span>
         <span class="stat__label">Valoración</span>
       </div>
-      <div class="stat__divider"></div>
+      <div class="stat__line"></div>
       <div class="stat">
-        <span class="stat__num">8<span class="red">+</span></span>
-        <span class="stat__label">Años formando campeones</span>
+        <span class="stat__num js-counter" data-target="8">0</span><span class="red">+</span>
+        <span class="stat__label">Años forjando campeones</span>
       </div>
     </div>
   </div>
-  <div class="hero__scroll">
-    <div class="scroll-indicator">
-      <span></span>
-    </div>
-  </div>
+
+  <!-- Diagonal inferior -->
+  <div class="hero__slash" aria-hidden="true"></div>
 </section>
 
-<!-- ============================================================
-     DIFERENCIADOR RÁPIDO
-============================================================ -->
-<section class="differentiator">
-  <div class="container">
-    <div class="diff-ticker">
-      <span>COACHES ATENTOS</span>
-      <span class="red">✦</span>
-      <span>ACOMPAÑAMIENTO REAL</span>
-      <span class="red">✦</span>
-      <span>COMUNIDAD FUERTE</span>
-      <span class="red">✦</span>
-      <span>NUNCA SOLO</span>
-      <span class="red">✦</span>
-      <span>PLANES ACCESIBLES</span>
-      <span class="red">✦</span>
-      <span>COACHES ATENTOS</span>
-      <span class="red">✦</span>
-      <span>ACOMPAÑAMIENTO REAL</span>
-      <span class="red">✦</span>
-      <span>COMUNIDAD FUERTE</span>
-      <span class="red">✦</span>
-    </div>
+<!-- ══════════════════════════════════════════
+     TICKER
+══════════════════════════════════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker">
+    <span>COACHES ATENTOS</span>
+    <span class="ticker-dot">力</span>
+    <span>ACOMPAÑAMIENTO REAL</span>
+    <span class="ticker-dot">功</span>
+    <span>COMUNIDAD FUERTE</span>
+    <span class="ticker-dot">武</span>
+    <span>NUNCA SOLO</span>
+    <span class="ticker-dot">道</span>
+    <span>PLANES ACCESIBLES</span>
+    <span class="ticker-dot">力</span>
+    <span>COACHES ATENTOS</span>
+    <span class="ticker-dot">功</span>
+    <span>ACOMPAÑAMIENTO REAL</span>
+    <span class="ticker-dot">武</span>
+    <span>COMUNIDAD FUERTE</span>
+    <span class="ticker-dot">道</span>
   </div>
-</section>
+</div>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════════
      BENEFICIOS
-============================================================ -->
+══════════════════════════════════════════ -->
 <section class="benefits section" id="beneficios">
+  <div class="benefits__texture"></div>
+
+  <!-- Líneas verticales decorativas -->
+  <div class="section-verticals" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header js-reveal-up">
+      <span class="section-kanji" aria-hidden="true">力</span>
       <span class="section-tag">Por qué elegirnos</span>
-      <h2 class="section-title">NO ES SOLO UN GIMNASIO.<br /><span class="red">ES TU EQUIPO.</span></h2>
+      <h2 class="section-title">NO ES SOLO UN GIMNASIO.<br /><em class="red">ES TU EQUIPO.</em></h2>
       <p class="section-sub">Aquí cada miembro importa. No eres un número de membresía — eres parte de algo más grande.</p>
     </div>
+
     <div class="benefits__grid">
-      <div class="benefit-card reveal">
+      <div class="benefit-card js-reveal-card" data-delay="0">
+        <div class="benefit-card__slash"></div>
         <div class="benefit-card__icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3>Atención 1 a 1</h3>
-        <p>Los coaches te conocen por tu nombre, saben tus metas y hacen seguimiento real de tu progreso. Nada de olvidos ni caras nuevas cada semana.</p>
+        <p>Los coaches te conocen por tu nombre, saben tus metas y hacen seguimiento real. Nada de caras nuevas cada semana.</p>
+        <div class="benefit-card__num" aria-hidden="true">01</div>
       </div>
-      <div class="benefit-card reveal delay-1">
+
+      <div class="benefit-card js-reveal-card" data-delay="80">
+        <div class="benefit-card__slash"></div>
         <div class="benefit-card__icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <h3>Coaches siempre atentos</h3>
-        <p>No te dejamos solo frente a las máquinas. En cada sesión hay un coach mirando tu técnica, corrigiéndote y motivándote.</p>
+        <h3>Coaches siempre presentes</h3>
+        <p>En cada sesión hay un coach mirando tu técnica, corrigiéndote y motivándote. Nunca estás solo frente a las máquinas.</p>
+        <div class="benefit-card__num" aria-hidden="true">02</div>
       </div>
-      <div class="benefit-card reveal delay-2">
+
+      <div class="benefit-card js-reveal-card" data-delay="160">
+        <div class="benefit-card__slash"></div>
         <div class="benefit-card__icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
         <h3>Comunidad real</h3>
-        <p>Retos grupales, celebraciones de logros y un grupo de WhatsApp donde todos se apoyan. La motivación colectiva es imparable.</p>
+        <p>Retos grupales, celebraciones de logros, y un grupo donde todos se apoyan. La motivación colectiva es imparable.</p>
+        <div class="benefit-card__num" aria-hidden="true">03</div>
       </div>
-      <div class="benefit-card reveal">
+
+      <div class="benefit-card js-reveal-card" data-delay="240">
+        <div class="benefit-card__slash"></div>
         <div class="benefit-card__icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
         </div>
         <h3>Ideal para principiantes</h3>
-        <p>¿Primera vez en un gym? Aquí nadie te juzga. Tenemos un programa especial de bienvenida para que empieces con confianza y sin miedo.</p>
+        <p>¿Primera vez en un gym? Nadie te juzga. Programa especial de bienvenida para que empieces con confianza absoluta.</p>
+        <div class="benefit-card__num" aria-hidden="true">04</div>
       </div>
-      <div class="benefit-card reveal delay-1">
+
+      <div class="benefit-card js-reveal-card" data-delay="320">
+        <div class="benefit-card__slash"></div>
         <div class="benefit-card__icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
         <h3>Ambiente motivador</h3>
         <p>Música, energía y gente que empuja hacia arriba. El ambiente marca la diferencia entre rendirse y superarse.</p>
+        <div class="benefit-card__num" aria-hidden="true">05</div>
       </div>
-      <div class="benefit-card reveal delay-2">
+
+      <div class="benefit-card js-reveal-card" data-delay="400">
+        <div class="benefit-card__slash"></div>
         <div class="benefit-card__icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
         <h3>Planes accesibles</h3>
-        <p>Invertir en tu salud no debería arruinarte. Tenemos opciones para todos los bolsillos, sin contratos trampa ni letra pequeña.</p>
+        <p>Invertir en tu salud no debería arruinarte. Opciones para todos, sin contratos trampa ni letra pequeña.</p>
+        <div class="benefit-card__num" aria-hidden="true">06</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     PROPUESTA DE VALOR — EL DUEÑO
-============================================================ -->
-<section class="owner-section section">
+<!-- ══════════════════════════════════════════
+     DUEÑO — SECCIÓN DIAGONAL
+══════════════════════════════════════════ -->
+<section class="owner-section">
+  <div class="owner-section__texture"></div>
   <div class="container">
-    <div class="owner-card reveal">
-      <div class="owner-card__img-wrap">
-        <div class="owner-card__img owner-img-placeholder">
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(225,6,0,0.4)" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span>Foto del dueño</span>
+    <div class="owner-layout">
+      <div class="owner-img-col js-reveal-left">
+        <div class="owner-img-frame">
+          <img
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=700&q=80&fm=webp"
+            alt="Dueño Pagoda Fitness" loading="lazy" />
+          <div class="owner-img-frame__border"></div>
+          <div class="owner-img-badge">Fundador &amp; Head Coach</div>
         </div>
-        <div class="owner-card__badge">Fundador &amp; Head Coach</div>
+        <!-- Kanji decorativo -->
+        <div class="owner-kanji" aria-hidden="true">道</div>
       </div>
-      <div class="owner-card__content">
+      <div class="owner-content-col js-reveal-right">
         <span class="section-tag">Del dueño para ti</span>
-        <h2>"Yo estoy aquí. Cada día."</h2>
-        <p class="owner-quote">"Abrí Pagoda Gym porque me cansé de ver gimnasios donde la gente entraba y salía sin que nadie les prestara atención. Aquí yo mismo estoy en el piso, conozco tu nombre, sé cuánto llevas entrenando y me importa que logres tus metas. No somos perfectos, pero sí somos los que más nos esforzamos por cada uno de ustedes."</p>
-        <p class="owner-name">— <strong>[Nombre del Dueño]</strong>, Fundador de Pagoda Gym</p>
-        <a href="https://wa.me/1234567890?text=Hola%2C%20me%20gustaría%20conocer%20el%20gimnasio" class="btn btn--red" target="_blank">Habla conmigo directamente</a>
+        <h2 class="owner-title">
+          "Yo estoy aquí.<br /><span class="red">Cada día."</span>
+        </h2>
+        <p class="owner-quote">
+          "Abrí Pagoda porque me cansé de ver gimnasios donde la gente entraba y salía sin que nadie les prestara atención. Aquí yo mismo estoy en el piso, conozco tu nombre, sé cuánto llevas entrenando y me importa que logres tus metas. No somos perfectos, pero sí somos los que más nos esforzamos."
+        </p>
+        <p class="owner-name">— <strong>[Nombre del Dueño]</strong>, Fundador de Pagoda Fitness</p>
+        <a href="https://wa.me/1234567890?text=Hola%2C%20me%20gustaría%20conocer%20el%20gimnasio" class="btn btn--red" target="_blank">
+          Habla conmigo directamente →
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     TRANSFORMACIONES — MURO REAL
-============================================================ -->
+<!-- ══════════════════════════════════════════
+     TRANSFORMACIONES
+══════════════════════════════════════════ -->
 <section class="transformations section" id="transformaciones">
+  <div class="transform-bg-img">
+    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1920&q=60&fm=webp" alt="" loading="lazy" />
+    <div class="transform-bg-overlay"></div>
+  </div>
+
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header js-reveal-up">
+      <span class="section-kanji" aria-hidden="true">変</span>
       <span class="section-tag">Resultados reales</span>
-      <h2 class="section-title">ELLOS LO HICIERON.<br /><span class="red">TÚ TAMBIÉN PUEDES.</span></h2>
+      <h2 class="section-title">ELLOS LO HICIERON.<br /><em class="red">TÚ TAMBIÉN PUEDES.</em></h2>
       <p class="section-sub">No vendemos promesas. Mostramos resultados de personas reales, con vidas reales, que entrenaron aquí.</p>
     </div>
+
     <div class="transforms__grid">
-      <div class="transform-card reveal">
+      <div class="transform-card js-reveal-card" data-delay="0">
         <div class="transform-card__images">
-          <div class="transform-img transform-before">
+          <div class="transform-img">
             <span class="transform-label">ANTES</span>
-            <div class="img-placeholder">Foto antes</div>
+            <img src="https://images.unsplash.com/photo-1583454122231-b1ef6d4b8e2d?w=400&q=80&fm=webp" alt="Antes" loading="lazy" />
           </div>
-          <div class="transform-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-          <div class="transform-img transform-after">
+          <div class="transform-arrow">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="transform-img">
             <span class="transform-label after-label">DESPUÉS</span>
-            <div class="img-placeholder">Foto después</div>
+            <img src="https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=400&q=80&fm=webp" alt="Después" loading="lazy" />
           </div>
         </div>
         <div class="transform-card__info">
           <h4>María G. — 6 meses</h4>
-          <p>"Llegué sin saber nada. El coach [Nombre] me explicó todo desde cero y nunca me sentí ridícula. Bajé 12 kg y gané una familia."</p>
+          <p>"Llegué sin saber nada. Nunca me sentí ridícula. Bajé 12 kg y gané una familia."</p>
           <div class="transform-result"><span class="red">-12 kg</span> · Más energía · Más confianza</div>
         </div>
       </div>
-      <div class="transform-card reveal delay-1">
+
+      <div class="transform-card js-reveal-card" data-delay="120">
         <div class="transform-card__images">
-          <div class="transform-img transform-before">
+          <div class="transform-img">
             <span class="transform-label">ANTES</span>
-            <div class="img-placeholder">Foto antes</div>
+            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&q=80&fm=webp" alt="Antes" loading="lazy" />
           </div>
-          <div class="transform-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-          <div class="transform-img transform-after">
+          <div class="transform-arrow">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="transform-img">
             <span class="transform-label after-label">DESPUÉS</span>
-            <div class="img-placeholder">Foto después</div>
+            <img src="https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?w=400&q=80&fm=webp" alt="Después" loading="lazy" />
           </div>
         </div>
         <div class="transform-card__info">
           <h4>Carlos R. — 4 meses</h4>
-          <p>"Vine por primera vez muerto de vergüenza. Hoy soy el que anima a los demás. La comunidad aquí es distinta, de verdad."</p>
+          <p>"Vine muerto de vergüenza. Hoy soy el que anima a los demás. La comunidad es distinta, de verdad."</p>
           <div class="transform-result"><span class="red">+8 kg músculo</span> · Confianza total</div>
         </div>
       </div>
-      <div class="transform-card reveal delay-2">
+
+      <div class="transform-card js-reveal-card" data-delay="240">
         <div class="transform-card__images">
-          <div class="transform-img transform-before">
+          <div class="transform-img">
             <span class="transform-label">ANTES</span>
-            <div class="img-placeholder">Foto antes</div>
+            <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&q=80&fm=webp" alt="Antes" loading="lazy" />
           </div>
-          <div class="transform-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-          <div class="transform-img transform-after">
+          <div class="transform-arrow">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="transform-img">
             <span class="transform-label after-label">DESPUÉS</span>
-            <div class="img-placeholder">Foto después</div>
+            <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&q=80&fm=webp" alt="Después" loading="lazy" />
           </div>
         </div>
         <div class="transform-card__info">
           <h4>Ana L. — 8 meses</h4>
-          <p>"Me dijeron que con mis rodillas no podría entrenar. Aquí adaptaron todo para mí. Hoy corro 5km sin dolor."</p>
+          <p>"Me dijeron que con mis rodillas no podría. Aquí adaptaron todo para mí. Hoy corro 5km sin dolor."</p>
           <div class="transform-result"><span class="red">5km</span> sin dolor · Recuperación total</div>
         </div>
       </div>
     </div>
-    <div class="transforms__cta reveal">
+
+    <div class="transforms__cta js-reveal-up" data-delay="200">
       <p>¿Quieres ser la próxima historia de éxito?</p>
-      <a href="https://wa.me/1234567890?text=Quiero%20empezar%20mi%20transformación%20en%20Pagoda%20Gym" class="btn btn--red btn--lg" target="_blank">Empieza hoy — Es gratis el primer día</a>
+      <a href="https://wa.me/1234567890?text=Quiero%20empezar%20mi%20transformación%20en%20Pagoda%20Fitness" class="btn btn--red btn--lg" target="_blank">
+        Empieza hoy — Es gratis el primer día →
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════════
      ATLETA DEL MES
-============================================================ -->
-<section class="athlete-month section">
+══════════════════════════════════════════ -->
+<section class="athlete-month">
+  <div class="athlete-month__texture"></div>
   <div class="container">
-    <div class="athlete-month__inner reveal">
-      <div class="athlete-month__badge">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="#E10600"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        ATLETA DEL MES
+    <div class="athlete-month__inner js-reveal-up">
+      <div class="athlete-month__star-col" aria-hidden="true">
+        <svg viewBox="0 0 60 60" fill="none"><polygon points="30,2 37,22 58,22 42,35 48,56 30,44 12,56 18,35 2,22 23,22" fill="#E10600" opacity="0.15"/><polygon points="30,8 36,24 54,24 40,34 45,52 30,42 15,52 20,34 6,24 24,24" fill="#E10600"/></svg>
+        <span class="athlete-month__kanji">王</span>
       </div>
-      <div class="athlete-month__img-wrap">
-        <div class="athlete-month__img img-placeholder-circle">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(225,6,0,0.5)" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span>Foto atleta</span>
+      <div class="athlete-month__img-col">
+        <div class="athlete-month__img-frame">
+          <img src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?w=400&q=80&fm=webp" alt="Atleta del mes" loading="lazy" />
+          <div class="athlete-month__img-frame-border"></div>
         </div>
       </div>
       <div class="athlete-month__content">
+        <div class="athlete-month__badge">⭐ ATLETA DEL MES</div>
         <h2>[Nombre del Atleta]</h2>
         <p class="athlete-month__meta">Miembro desde hace 7 meses · 28 asistencias este mes</p>
         <p class="athlete-month__quote">"Nunca creí que llegaría hasta aquí. Pagoda me enseñó que la consistencia lo es todo."</p>
         <div class="athlete-month__stats">
-          <div class="am-stat"><span class="am-num red">28</span><span>Días entrenados</span></div>
-          <div class="am-stat"><span class="am-num red">-15kg</span><span>Perdidos</span></div>
-          <div class="am-stat"><span class="am-num red">6 meses</span><span>Racha activa</span></div>
+          <div class="am-stat"><span class="am-num">28</span><span>Días entrenados</span></div>
+          <div class="am-stat"><span class="am-num">-15kg</span><span>Perdidos</span></div>
+          <div class="am-stat"><span class="am-num">6m</span><span>Racha activa</span></div>
         </div>
       </div>
     </div>
-    <p class="athlete-month__cta-text reveal">¿Quieres ser el próximo atleta del mes? La constancia te pone en el mapa.</p>
   </div>
 </section>
 
-<!-- ============================================================
-     ENTRENADORES
-============================================================ -->
+<!-- ══════════════════════════════════════════
+     COACHES
+══════════════════════════════════════════ -->
 <section class="coaches section" id="entrenadores">
+  <div class="section-verticals" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header js-reveal-up">
+      <span class="section-kanji" aria-hidden="true">師</span>
       <span class="section-tag">Tu equipo</span>
-      <h2 class="section-title">COACHES QUE<br /><span class="red">SÍ SE PREOCUPAN.</span></h2>
+      <h2 class="section-title">COACHES QUE<br /><em class="red">SÍ SE PREOCUPAN.</em></h2>
       <p class="section-sub">No son figuras decorativas. Son mentores que han estado donde tú estás y saben cómo llevarte a donde quieres ir.</p>
     </div>
+
     <div class="coaches__grid">
-      <div class="coach-card reveal">
-        <div class="coach-card__img img-placeholder coach-img">
-          <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="rgba(225,6,0,0.4)" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <div class="coach-card js-reveal-card" data-delay="0">
+        <div class="coach-card__img">
+          <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80&fm=webp" alt="Coach" loading="lazy" />
+          <div class="coach-card__overlay"></div>
+          <div class="coach-card__slash"></div>
         </div>
         <div class="coach-card__content">
-          <h3>[Nombre Coach 1]</h3>
           <span class="coach-specialty">Fuerza &amp; Hipertrofia</span>
+          <h3>[Nombre Coach 1]</h3>
           <p>"Cada persona que entra aquí tiene potencial. Mi trabajo es ayudarte a verlo."</p>
           <div class="coach-certs">
             <span>NSCA Certified</span>
-            <span>5 años de experiencia</span>
+            <span>5 años de exp.</span>
           </div>
         </div>
       </div>
-      <div class="coach-card reveal delay-1">
-        <div class="coach-card__img img-placeholder coach-img">
-          <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="rgba(225,6,0,0.4)" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+
+      <div class="coach-card js-reveal-card" data-delay="130">
+        <div class="coach-card__img">
+          <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80&fm=webp" alt="Coach" loading="lazy" />
+          <div class="coach-card__overlay"></div>
+          <div class="coach-card__slash"></div>
         </div>
         <div class="coach-card__content">
-          <h3>[Nombre Coach 2]</h3>
           <span class="coach-specialty">Cardio &amp; Pérdida de grasa</span>
+          <h3>[Nombre Coach 2]</h3>
           <p>"No me importa si es tu día 1 o tu día 300. Siempre te doy el 100%."</p>
           <div class="coach-certs">
             <span>ACSM Certified</span>
@@ -342,16 +431,19 @@
           </div>
         </div>
       </div>
-      <div class="coach-card reveal delay-2">
-        <div class="coach-card__img img-placeholder coach-img">
-          <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="rgba(225,6,0,0.4)" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+
+      <div class="coach-card js-reveal-card" data-delay="260">
+        <div class="coach-card__img">
+          <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=600&q=80&fm=webp" alt="Coach" loading="lazy" />
+          <div class="coach-card__overlay"></div>
+          <div class="coach-card__slash"></div>
         </div>
         <div class="coach-card__content">
-          <h3>[Nombre Coach 3]</h3>
           <span class="coach-specialty">Principiantes &amp; Rehabilitación</span>
+          <h3>[Nombre Coach 3]</h3>
           <p>"Especialista en quienes dicen 'yo no puedo'. Porque sí pueden."</p>
           <div class="coach-certs">
-            <span>FMS Certificada</span>
+            <span>FMS Certified</span>
             <span>Lesiones deportivas</span>
           </div>
         </div>
@@ -360,441 +452,246 @@
   </div>
 </section>
 
-<!-- ============================================================
-     RETO DEL MES
-============================================================ -->
-<section class="challenge section">
-  <div class="challenge__bg"></div>
-  <div class="container">
-    <div class="challenge__inner">
-      <div class="challenge__content reveal">
-        <span class="section-tag">Reto del mes</span>
-        <h2 class="challenge__title">RETO <span class="red">30 DÍAS</span><br />SIN EXCUSAS</h2>
-        <p>Entrena 20 días en julio y desbloquea una semana GRATIS el mes siguiente. ¿Quién está dentro?</p>
-        <div class="challenge__rules">
-          <div class="rule"><span class="rule-num red">01</span><span>Registra tu asistencia en recepción cada día</span></div>
-          <div class="rule"><span class="rule-num red">02</span><span>Etiqueta a Pagoda Gym en tu story de entrenamiento</span></div>
-          <div class="rule"><span class="rule-num red">03</span><span>Llega a 20 sesiones antes del 31 de julio</span></div>
-          <div class="rule"><span class="rule-num red">04</span><span>Gana 1 semana gratis + reconocimiento en redes</span></div>
-        </div>
-        <a href="https://wa.me/1234567890?text=Me%20uno%20al%20reto%20del%20mes%20de%20Pagoda%20Gym" class="btn btn--red btn--lg" target="_blank">¡Me uno al reto!</a>
-      </div>
-      <div class="challenge__counter reveal delay-2">
-        <div class="challenge__counter-label">Participantes inscritos</div>
-        <div class="challenge__counter-num" id="challengeCounter">0</div>
-        <div class="challenge__counter-sub">y creciendo</div>
-        <div class="progress-bar-wrap">
-          <div class="progress-bar" id="challengeBar"></div>
-        </div>
-        <div class="progress-label">Meta: 100 participantes</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     RANKING ASISTENCIA
-============================================================ -->
-<section class="ranking section">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-tag">Comunidad</span>
-      <h2 class="section-title">RANKING DE<br /><span class="red">ASISTENCIA</span></h2>
-      <p class="section-sub">La consistencia tiene recompensa. Los más constantes del mes aparecen aquí y reciben beneficios exclusivos.</p>
-    </div>
-    <div class="ranking__list reveal">
-      <div class="rank-item rank-gold">
-        <div class="rank-pos">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFD700"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="rank-avatar img-placeholder-sm">M</div>
-        <div class="rank-info">
-          <strong>María González</strong>
-          <span>Miembro desde enero 2024</span>
-        </div>
-        <div class="rank-days"><span class="red">28</span> días</div>
-        <div class="rank-badge gold-badge">CAMPEÓN</div>
-      </div>
-      <div class="rank-item rank-silver">
-        <div class="rank-pos"><span class="rank-num">2</span></div>
-        <div class="rank-avatar img-placeholder-sm">C</div>
-        <div class="rank-info">
-          <strong>Carlos Reyes</strong>
-          <span>Miembro desde marzo 2024</span>
-        </div>
-        <div class="rank-days"><span class="red">25</span> días</div>
-        <div class="rank-badge silver-badge">TOP 3</div>
-      </div>
-      <div class="rank-item rank-bronze">
-        <div class="rank-pos"><span class="rank-num">3</span></div>
-        <div class="rank-avatar img-placeholder-sm">A</div>
-        <div class="rank-info">
-          <strong>Ana López</strong>
-          <span>Miembro desde febrero 2024</span>
-        </div>
-        <div class="rank-days"><span class="red">23</span> días</div>
-        <div class="rank-badge bronze-badge">TOP 3</div>
-      </div>
-      <div class="rank-item">
-        <div class="rank-pos"><span class="rank-num">4</span></div>
-        <div class="rank-avatar img-placeholder-sm">J</div>
-        <div class="rank-info">
-          <strong>Juan Martínez</strong>
-          <span>Miembro desde mayo 2024</span>
-        </div>
-        <div class="rank-days"><span class="red">20</span> días</div>
-      </div>
-      <div class="rank-item">
-        <div class="rank-pos"><span class="rank-num">5</span></div>
-        <div class="rank-avatar img-placeholder-sm">S</div>
-        <div class="rank-info">
-          <strong>Sofía Herrera</strong>
-          <span>Miembro desde abril 2024</span>
-        </div>
-        <div class="rank-days"><span class="red">19</span> días</div>
-      </div>
-    </div>
-    <p class="ranking__footer reveal">¿Quieres aparecer aquí? Cada visita cuenta. <a href="https://wa.me/1234567890" target="_blank" class="red">Únete hoy →</a></p>
-  </div>
-</section>
-
-<!-- ============================================================
-     PROGRAMA DE REFERIDOS
-============================================================ -->
-<section class="referral section">
-  <div class="container">
-    <div class="referral__inner reveal">
-      <div class="referral__content">
-        <span class="section-tag">Refiere y gana</span>
-        <h2>TRAE A UN AMIGO.<br /><span class="red">AMBOS GANAN.</span></h2>
-        <p>Porque la mejor motivación es entrenar acompañado. Si traes a alguien, los dos se llevan beneficios reales.</p>
-        <div class="referral__steps">
-          <div class="ref-step">
-            <div class="ref-step__num">1</div>
-            <div>
-              <strong>Comparte el link</strong>
-              <p>Envía el link o el código de tu gymcard a quien quieras invitar.</p>
-            </div>
-          </div>
-          <div class="ref-step">
-            <div class="ref-step__num">2</div>
-            <div>
-              <strong>Tu amigo se inscribe</strong>
-              <p>Menciona tu nombre al inscribirse. Así conectamos la referencia.</p>
-            </div>
-          </div>
-          <div class="ref-step">
-            <div class="ref-step__num">3</div>
-            <div>
-              <strong>Ambos ganan</strong>
-              <p>Tú: 1 semana gratis. Tu amigo: 15% de descuento en su primer mes.</p>
-            </div>
-          </div>
-        </div>
-        <a href="https://wa.me/1234567890?text=Quiero%20conocer%20el%20programa%20de%20referidos%20de%20Pagoda%20Gym" class="btn btn--red" target="_blank">Conoce los detalles</a>
-      </div>
-      <div class="referral__visual reveal delay-1">
-        <div class="ref-card">
-          <div class="ref-card__top">
-            <span class="ref-card__logo">PAGODA<span class="red">GYM</span></span>
-            <span class="ref-card__type">GYMCARD</span>
-          </div>
-          <div class="ref-card__avatar img-placeholder-circle-sm">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(225,6,0,0.5)" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <div class="ref-card__name">[Tu Nombre]</div>
-          <div class="ref-card__code">CÓDIGO: <span class="red">PG-XXXX</span></div>
-          <div class="ref-card__bar">
-            <div class="ref-card__barcode"></div>
-          </div>
-          <div class="ref-card__footer">Válida hasta dic 2025 · Miembro activo</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     TEST FÍSICO GRATUITO + RUTINA
-============================================================ -->
+<!-- ══════════════════════════════════════════
+     FREEBIES — PARALAX BAND
+══════════════════════════════════════════ -->
 <section class="freebies section">
+  <div class="freebies__texture"></div>
   <div class="container">
+    <div class="section-header js-reveal-up">
+      <span class="section-kanji" aria-hidden="true">贈</span>
+      <span class="section-tag">Regalo de bienvenida</span>
+      <h2 class="section-title">EMPIEZA CON<br /><em class="red">TODO A TU FAVOR.</em></h2>
+    </div>
     <div class="freebies__grid">
-      <div class="freebie-card reveal">
-        <div class="freebie-card__icon red">
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <div class="freebie-card js-reveal-card" data-delay="0">
+        <div class="freebie-card__num">01</div>
+        <div class="freebie-card__icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="1.3"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
         <h3>Test Físico Gratuito</h3>
-        <p>Ven, te evaluamos y te decimos exactamente dónde estás y a dónde puedes llegar. Sin compromiso. Solo conocimiento.</p>
-        <ul class="freebie-list">
+        <p>Te evaluamos y te decimos exactamente dónde estás y a dónde puedes llegar. Sin compromiso.</p>
+        <ul>
           <li>Composición corporal</li>
           <li>Resistencia cardiovascular</li>
-          <li>Fuerza base</li>
-          <li>Flexibilidad y movilidad</li>
+          <li>Fuerza base &amp; flexibilidad</li>
         </ul>
-        <a href="https://wa.me/1234567890?text=Quiero%20mi%20test%20físico%20gratuito%20en%20Pagoda%20Gym" class="btn btn--outline" target="_blank">Agenda tu test gratis</a>
+        <a href="https://wa.me/1234567890?text=Quiero%20mi%20test%20físico%20gratuito" class="btn btn--ghost" target="_blank">Agendar →</a>
       </div>
-      <div class="freebie-card freebie-card--highlight reveal delay-1">
-        <div class="freebie-card__icon white">
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        </div>
+
+      <div class="freebie-card freebie-card--featured js-reveal-card" data-delay="100">
         <div class="freebie-tag">GRATIS</div>
+        <div class="freebie-card__num">02</div>
+        <div class="freebie-card__icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="1.3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
         <h3>Rutina Personalizada</h3>
-        <p>Descarga tu rutina de inicio adaptada a tus metas y nivel. Solo escríbenos por WhatsApp y te la enviamos al instante.</p>
-        <ul class="freebie-list">
-          <li>Adaptada a tus metas</li>
-          <li>Con videos de cada ejercicio</li>
-          <li>Plan nutricional base incluido</li>
+        <p>Solo escríbenos por WhatsApp y te la enviamos al instante. Adaptada a tus metas y nivel.</p>
+        <ul>
+          <li>Videos de cada ejercicio</li>
+          <li>Plan nutricional base</li>
           <li>Seguimiento por WhatsApp</li>
         </ul>
-        <a href="https://wa.me/1234567890?text=Quiero%20mi%20rutina%20gratuita%20de%20Pagoda%20Gym" class="btn btn--red" target="_blank">Recibir mi rutina gratis</a>
+        <a href="https://wa.me/1234567890?text=Quiero%20mi%20rutina%20gratuita" class="btn btn--red" target="_blank">Recibir ahora →</a>
       </div>
-      <div class="freebie-card reveal delay-2">
-        <div class="freebie-card__icon red">
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+
+      <div class="freebie-card js-reveal-card" data-delay="200">
+        <div class="freebie-card__num">03</div>
+        <div class="freebie-card__icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="1.3"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3>Programa de Bienvenida</h3>
-        <p>Primeros 7 días con tu coach asignado. Te enseñamos cómo funciona todo, cada máquina, cada ejercicio. Sin miedo.</p>
-        <ul class="freebie-list">
-          <li>Coach personal los primeros 7 días</li>
-          <li>Tour completo del gimnasio</li>
+        <p>Primeros 7 días con tu coach asignado. Aprende todo sin miedo ni vergüenza.</p>
+        <ul>
+          <li>Coach personal 7 días</li>
+          <li>Tour completo del gym</li>
           <li>Integración a la comunidad</li>
-          <li>Plan de inicio personalizado</li>
         </ul>
-        <a href="https://wa.me/1234567890?text=Quiero%20empezar%20con%20el%20programa%20de%20bienvenida%20de%20Pagoda%20Gym" class="btn btn--outline" target="_blank">Quiero empezar</a>
+        <a href="https://wa.me/1234567890?text=Quiero%20el%20programa%20de%20bienvenida" class="btn btn--ghost" target="_blank">Quiero empezar →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     HORARIOS Y PRECIOS
-============================================================ -->
-<section class="schedules section" id="horarios">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-tag">Horarios</span>
-      <h2 class="section-title">SIEMPRE<br /><span class="red">ABIERTOS PARA TI.</span></h2>
-    </div>
-    <div class="schedules__grid">
-      <div class="schedule-table reveal">
-        <div class="schedule-row header-row">
-          <span>Día</span>
-          <span>Mañana</span>
-          <span>Tarde</span>
-          <span>Noche</span>
-        </div>
-        <div class="schedule-row">
-          <span>Lunes — Viernes</span>
-          <span>5:30 AM</span>
-          <span>12:00 PM</span>
-          <span>6:00 PM</span>
-        </div>
-        <div class="schedule-row">
-          <span>Sábado</span>
-          <span>7:00 AM</span>
-          <span>—</span>
-          <span>4:00 PM</span>
-        </div>
-        <div class="schedule-row">
-          <span>Domingo</span>
-          <span>8:00 AM</span>
-          <span>—</span>
-          <span>1:00 PM</span>
-        </div>
-      </div>
-      <div class="schedule-classes reveal delay-1">
-        <h3>Clases grupales</h3>
-        <div class="class-item">
-          <span class="class-time">6:00 AM</span>
-          <span class="class-name">CrossFit Funcional</span>
-          <span class="class-coach">Coach [Nombre]</span>
-        </div>
-        <div class="class-item">
-          <span class="class-time">7:00 AM</span>
-          <span class="class-name">Cardio + Core</span>
-          <span class="class-coach">Coach [Nombre]</span>
-        </div>
-        <div class="class-item">
-          <span class="class-time">6:30 PM</span>
-          <span class="class-name">Fuerza &amp; Potencia</span>
-          <span class="class-coach">Coach [Nombre]</span>
-        </div>
-        <div class="class-item">
-          <span class="class-time">7:30 PM</span>
-          <span class="class-name">Full Body Quema</span>
-          <span class="class-coach">Coach [Nombre]</span>
-        </div>
-        <a href="https://wa.me/1234567890?text=Quiero%20ver%20el%20horario%20completo%20de%20Pagoda%20Gym" class="btn btn--outline" target="_blank" style="margin-top:1rem;display:inline-block">Ver horario completo</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PRECIOS
-============================================================ -->
+<!-- ══════════════════════════════════════════
+     PRECIOS — SOLO 2 PLANES
+══════════════════════════════════════════ -->
 <section class="pricing section" id="precios">
+  <div class="pricing__parallax-bg">
+    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1920&q=60&fm=webp" alt="" loading="lazy" />
+    <div class="pricing__parallax-overlay"></div>
+  </div>
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header js-reveal-up">
+      <span class="section-kanji" aria-hidden="true">金</span>
       <span class="section-tag">Inversión en ti</span>
-      <h2 class="section-title">PLANES QUE SÍ<br /><span class="red">TIENEN SENTIDO.</span></h2>
+      <h2 class="section-title">PLANES QUE SÍ<br /><em class="red">TIENEN SENTIDO.</em></h2>
       <p class="section-sub">Sin contratos trampa. Sin letra pequeña. Sin sorpresas.</p>
     </div>
+
     <div class="pricing__grid">
-      <div class="price-card reveal">
+      <!-- Plan Estudiante -->
+      <div class="price-card js-reveal-card" data-delay="0">
+        <div class="price-card__kanji" aria-hidden="true">生</div>
         <div class="price-card__header">
-          <h3>Básico</h3>
+          <span class="price-card__tag">Para estudiantes</span>
+          <h3>Estudiante</h3>
           <div class="price-card__price">
             <span class="price-currency">$</span>
-            <span class="price-amount">XXX</span>
+            <span class="price-amount js-counter" data-target="XXX">XXX</span>
             <span class="price-period">/mes</span>
           </div>
+          <p class="price-card__note">Presenta tu credencial vigente</p>
         </div>
         <ul class="price-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Acceso libre al gym</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Orientación inicial con coach</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Acceso a rutina base</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Comunidad WhatsApp</li>
+          <li><span class="check">✦</span> Acceso libre al gym</li>
+          <li><span class="check">✦</span> Orientación inicial con coach</li>
+          <li><span class="check">✦</span> Rutina base incluida</li>
+          <li><span class="check">✦</span> Comunidad WhatsApp</li>
+          <li><span class="check">✦</span> 2 clases grupales/semana</li>
+          <li><span class="check">✦</span> Test físico de bienvenida</li>
         </ul>
-        <a href="https://wa.me/1234567890?text=Quiero%20el%20plan%20básico%20de%20Pagoda%20Gym" class="btn btn--outline" target="_blank">Empezar aquí</a>
+        <a href="https://wa.me/1234567890?text=Quiero%20el%20plan%20estudiante%20de%20Pagoda%20Fitness" class="btn btn--ghost btn--full" target="_blank">
+          Quiero este plan →
+        </a>
       </div>
-      <div class="price-card price-card--featured reveal delay-1">
+
+      <!-- Plan Normal / featured -->
+      <div class="price-card price-card--featured js-reveal-card" data-delay="140">
         <div class="price-card__ribbon">MÁS POPULAR</div>
+        <div class="price-card__kanji" aria-hidden="true">強</div>
         <div class="price-card__header">
-          <h3>Completo</h3>
+          <span class="price-card__tag">Para todos</span>
+          <h3>Normal</h3>
           <div class="price-card__price">
             <span class="price-currency">$</span>
-            <span class="price-amount">XXX</span>
+            <span class="price-amount js-counter" data-target="XXX">XXX</span>
             <span class="price-period">/mes</span>
           </div>
+          <p class="price-card__note">Sin límites, sin excusas</p>
         </div>
         <ul class="price-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Todo lo del plan Básico</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Clases grupales ilimitadas</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 4 sesiones con coach/mes</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Seguimiento de progreso</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> GymCard digital incluida</li>
+          <li><span class="check">✦</span> Todo lo del plan Estudiante</li>
+          <li><span class="check">✦</span> Clases grupales ilimitadas</li>
+          <li><span class="check">✦</span> 4 sesiones con coach/mes</li>
+          <li><span class="check">✦</span> Seguimiento de progreso</li>
+          <li><span class="check">✦</span> GymCard digital incluida</li>
+          <li><span class="check">✦</span> Acceso a programa de referidos</li>
         </ul>
-        <a href="https://wa.me/1234567890?text=Quiero%20el%20plan%20completo%20de%20Pagoda%20Gym" class="btn btn--red" target="_blank">Lo quiero</a>
-      </div>
-      <div class="price-card reveal delay-2">
-        <div class="price-card__header">
-          <h3>Premium</h3>
-          <div class="price-card__price">
-            <span class="price-currency">$</span>
-            <span class="price-amount">XXX</span>
-            <span class="price-period">/mes</span>
-          </div>
-        </div>
-        <ul class="price-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Todo lo del plan Completo</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Entrenamiento personalizado ilimitado</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Plan nutricional mensual</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Acceso prioritario a eventos</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Badge "Élite" en ranking</li>
-        </ul>
-        <a href="https://wa.me/1234567890?text=Quiero%20el%20plan%20premium%20de%20Pagoda%20Gym" class="btn btn--outline" target="_blank">Ser élite</a>
+        <a href="https://wa.me/1234567890?text=Quiero%20el%20plan%20normal%20de%20Pagoda%20Fitness" class="btn btn--red btn--full" target="_blank">
+          Empezar ahora →
+        </a>
       </div>
     </div>
-    <p class="pricing__note reveal">¿No sabes qué plan elegir? <a href="https://wa.me/1234567890?text=Ayúdame%20a%20elegir%20el%20plan%20ideal%20en%20Pagoda%20Gym" target="_blank" class="red">Escríbenos y te asesoramos sin compromiso →</a></p>
+
+    <p class="pricing__note js-reveal-up" data-delay="200">
+      ¿No sabes qué plan elegir? <a href="https://wa.me/1234567890?text=Ayúdame%20a%20elegir%20mi%20plan%20en%20Pagoda" target="_blank" class="red">Escríbenos sin compromiso →</a>
+    </p>
   </div>
 </section>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════════
      TESTIMONIOS
-============================================================ -->
+══════════════════════════════════════════ -->
 <section class="testimonials section">
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header js-reveal-up">
+      <span class="section-kanji" aria-hidden="true">声</span>
       <span class="section-tag">Lo dicen ellos</span>
-      <h2 class="section-title">PALABRAS REALES.<br /><span class="red">PERSONAS REALES.</span></h2>
+      <h2 class="section-title">PALABRAS REALES.<br /><em class="red">PERSONAS REALES.</em></h2>
     </div>
     <div class="testimonials__grid">
-      <div class="testimonial-card reveal">
+      <div class="testimonial-card js-reveal-card" data-delay="0">
         <div class="testimonial-stars">★★★★★</div>
         <p>"Venía de tres gimnasios grandes donde nadie me ayudó. Aquí en el primer día ya me sabían el nombre. Eso no tiene precio."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">R</div>
-          <div>
-            <strong>Roberto M.</strong>
-            <span>Miembro desde hace 1 año</span>
-          </div>
+          <div><strong>Roberto M.</strong><span>Miembro · 1 año</span></div>
         </div>
       </div>
-      <div class="testimonial-card reveal delay-1">
+      <div class="testimonial-card js-reveal-card" data-delay="100">
         <div class="testimonial-stars">★★★★★</div>
-        <p>"Me daba vergüenza ir al gym por mi peso. Aquí me recibieron con respeto, sin juicios. Hoy entreno 5 días a la semana y ya no quiero parar."</p>
+        <p>"Me daba vergüenza ir al gym por mi peso. Aquí me recibieron con respeto, sin juicios. Hoy entreno 5 días a la semana."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">L</div>
-          <div>
-            <strong>Laura P.</strong>
-            <span>Miembro desde hace 8 meses</span>
-          </div>
+          <div><strong>Laura P.</strong><span>Miembro · 8 meses</span></div>
         </div>
       </div>
-      <div class="testimonial-card reveal delay-2">
+      <div class="testimonial-card js-reveal-card" data-delay="200">
         <div class="testimonial-stars">★★★★★</div>
-        <p>"El coach me mandó mensaje cuando no fui una semana a preguntar cómo estaba. ¿Cuándo viste eso en un gym? Aquí sí se preocupan."</p>
+        <p>"El coach me mandó mensaje cuando no fui una semana a preguntar cómo estaba. ¿Cuándo viste eso en un gym?"</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">D</div>
-          <div>
-            <strong>Diego F.</strong>
-            <span>Miembro desde hace 5 meses</span>
-          </div>
+          <div><strong>Diego F.</strong><span>Miembro · 5 meses</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     CTA FINAL PODEROSO
-============================================================ -->
-<section class="final-cta section">
-  <div class="final-cta__bg"></div>
+<!-- ══════════════════════════════════════════
+     CTA FINAL
+══════════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="final-cta__texture"></div>
+  <div class="final-cta__img">
+    <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1920&q=70&fm=webp" alt="" loading="lazy" />
+    <div class="final-cta__img-overlay"></div>
+  </div>
+  <!-- Líneas verticales pagoda -->
+  <div class="final-cta__verticals" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
   <div class="container">
-    <div class="final-cta__content reveal">
+    <div class="final-cta__content js-reveal-up">
+      <div class="final-cta__kanji" aria-hidden="true">今</div>
       <span class="section-tag">El momento es ahora</span>
-      <h2 class="final-cta__title">DEJA DE<br /><span class="red">ESPERAR.</span><br />EMPIEZA HOY.</h2>
-      <p class="final-cta__sub">El mejor día para empezar fue ayer. El segundo mejor día es hoy. Cada día que esperas es un día de progreso que pierdes.</p>
+      <h2 class="final-cta__title">
+        DEJA DE<br />
+        <span class="red">ESPERAR.</span><br />
+        EMPIEZA<br />
+        <span class="hero__title--outline">HOY.</span>
+      </h2>
+      <p class="final-cta__sub">El mejor día para empezar fue ayer. El segundo mejor día es hoy. Cada día que esperas es progreso que pierdes.</p>
       <div class="final-cta__guarantee">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>Garantía: si en la primera semana no ves la diferencia, te devolvemos tu dinero.</span>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E10600" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Si en la primera semana no ves la diferencia, te devolvemos tu dinero.
       </div>
       <div class="final-cta__ctas">
-        <a href="https://wa.me/1234567890?text=Quiero%20empezar%20hoy%20en%20Pagoda%20Gym" class="btn btn--red btn--xl" target="_blank">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Escríbenos ahora por WhatsApp
+        <a href="https://wa.me/1234567890?text=Quiero%20empezar%20hoy%20en%20Pagoda%20Fitness" class="btn btn--red btn--xl" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escríbenos por WhatsApp ahora
         </a>
-        <a href="tel:+1234567890" class="btn btn--outline btn--xl">Llámanos ahora</a>
+        <a href="tel:+1234567890" class="btn btn--ghost btn--xl">Llámanos ahora</a>
       </div>
-      <p class="final-cta__note">Respuesta garantizada en menos de 10 minutos en horario de atención.</p>
+      <p class="final-cta__note">Respuesta en menos de 10 minutos en horario de atención.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════════
      FOOTER
-============================================================ -->
+══════════════════════════════════════════ -->
 <footer class="footer">
+  <div class="footer__texture"></div>
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <div class="footer__logo">PAGODA<span class="red">GYM</span></div>
+        <img src="assets/logo.png" alt="Pagoda Fitness Center" class="footer__logo-img" />
         <p>El gimnasio donde te conocen por tu nombre y nunca te dejan solo.</p>
         <div class="footer__socials">
           <a href="#" aria-label="Instagram" target="_blank">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
           <a href="#" aria-label="Facebook" target="_blank">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           </a>
           <a href="#" aria-label="TikTok" target="_blank">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
           </a>
           <a href="https://wa.me/1234567890" aria-label="WhatsApp" target="_blank">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           </a>
         </div>
       </div>
@@ -804,8 +701,7 @@
           <li><a href="#beneficios">Beneficios</a></li>
           <li><a href="#entrenadores">Coaches</a></li>
           <li><a href="#transformaciones">Transformaciones</a></li>
-          <li><a href="#precios">Precios</a></li>
-          <li><a href="#horarios">Horarios</a></li>
+          <li><a href="#precios">Planes</a></li>
         </ul>
       </div>
       <div class="footer__links">
@@ -813,7 +709,6 @@
         <ul>
           <li><a href="#">Test físico gratis</a></li>
           <li><a href="#">Rutina gratuita</a></li>
-          <li><a href="#">Reto del mes</a></li>
           <li><a href="#">Programa de referidos</a></li>
           <li><a href="#">Bienvenida nuevos</a></li>
         </ul>
@@ -821,31 +716,29 @@
       <div class="footer__contact">
         <h4>Contáctanos</h4>
         <div class="footer__contact-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>[Dirección del Gym], [Ciudad]</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          [Dirección del Gym], [Ciudad]
         </div>
         <div class="footer__contact-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16"/></svg>
           <a href="tel:+1234567890">+1 (234) 567-890</a>
         </div>
-        <div class="footer__contact-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <a href="mailto:info@pagodagym.com">info@pagodagym.com</a>
-        </div>
-        <a href="https://wa.me/1234567890" class="btn btn--red" target="_blank" style="margin-top:1rem">WhatsApp ahora</a>
+        <a href="https://wa.me/1234567890" class="btn btn--red" target="_blank" style="margin-top:1.2rem">
+          WhatsApp ahora
+        </a>
       </div>
     </div>
     <div class="footer__bottom">
-      <p>&copy; 2025 Pagoda Gym. Todos los derechos reservados.</p>
-      <p>Hecho con ❤️ para nuestra comunidad</p>
+      <p>&copy; 2025 Pagoda Fitness Center. Todos los derechos reservados.</p>
+      <div class="footer__bottom-kanji" aria-hidden="true">力 功 武 道</div>
     </div>
   </div>
 </footer>
 
 <!-- WhatsApp Flotante -->
-<a href="https://wa.me/1234567890?text=Hola%2C%20vengo%20desde%20la%20página%20web%20de%20Pagoda%20Gym" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  <span class="whatsapp-tooltip">¡Chatea con nosotros!</span>
+<a href="https://wa.me/1234567890?text=Hola%2C%20vengo%20desde%20la%20página%20web%20de%20Pagoda%20Fitness" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="whatsapp-tooltip">¡Escríbenos!</span>
 </a>
 
 <script src="script.js"></script>
