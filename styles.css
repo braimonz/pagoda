@@ -222,8 +222,9 @@ ul { list-style: none; }
   top: 0; left: 0;
   width: 100%;
   z-index: 200;
-  padding: 20px 0;
-  background: linear-gradient(180deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.5) 70%, transparent 100%);
+  padding: 16px 0;
+  background: rgba(10,10,10,0.9);
+  backdrop-filter: blur(12px);
   transition: all 0.35s var(--ease-out);
 }
 
@@ -1716,6 +1717,7 @@ ul { list-style: none; }
   .section { padding: 72px 0; }
   .nav__links, .nav__cta { display: none; }
   .nav__burger { display: flex; }
+  .hero__content { padding-top: 110px; padding-bottom: 80px; }
   .hero__title { font-size: clamp(3.5rem, 18vw, 7rem); }
   .hero__ctas { flex-direction: column; }
   .hero__stats { gap: 24px; }
@@ -1732,6 +1734,7 @@ ul { list-style: none; }
 
 @media (max-width: 480px) {
   .container { padding: 0 18px; }
+  .hero__content { padding-top: 100px; padding-bottom: 60px; }
   .hero__title { font-size: clamp(3rem, 22vw, 6rem); }
   .transform-card__images { grid-template-columns: 1fr auto 1fr; }
   .transform-img img { height: 160px; }
