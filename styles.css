@@ -503,27 +503,25 @@ ul { list-style: none; }
   padding: 13px 0;
   position: relative;
   z-index: 5;
-  white-space: nowrap;
-  line-height: 1;
 }
 
-.ticker-wrap::before {
+.ticker-wrap::after {
   content: '';
   position: absolute;
   inset: 0;
   background: url('assets/texture-red.jpg') center/cover no-repeat;
-  opacity: 0.25;
+  opacity: 0.2;
   mix-blend-mode: multiply;
   pointer-events: none;
-  z-index: 0;
-}
-  z-index: 5;
+  z-index: 2;
 }
 
 .ticker {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: nowrap;
   gap: 40px;
   white-space: nowrap;
+  width: max-content;
   animation: ticker 22s linear infinite;
   font-family: var(--font-accent);
   font-weight: 800;
