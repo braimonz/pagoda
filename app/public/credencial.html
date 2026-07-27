@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi credencial — Pagoda Fitness Center</title>
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gemunu+Libre:wght@800&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/panel.css" />
+</head>
+<body>
+<div class="grain"></div>
+
+<main class="pantalla">
+  <div class="tarjeta" id="contenedor">
+    <div class="tarjeta__kanji" aria-hidden="true">証</div>
+    <p class="sub" style="text-align:center">Cargando tu credencial…</p>
+  </div>
+</main>
+
+<template id="tplCredencial">
+  <div class="tarjeta__kanji" aria-hidden="true">証</div>
+
+  <!-- Credencial -->
+  <div class="gymcard">
+    <div class="gymcard__top">
+      <img class="gymcard__logo" src="/sitio/assets/logo.png" alt="Pagoda"
+           onerror="this.style.display='none'" />
+      <span class="gymcard__tipo">GYMCARD</span>
+    </div>
+
+    <div class="gymcard__nombre" data-nombre></div>
+    <div class="gymcard__folio">SOCIO N.° <span data-folio></span></div>
+
+    <div class="gymcard__datos">
+      <div class="gymcard__dato">
+        <span>Plan</span>
+        <strong data-plan></strong>
+      </div>
+      <div class="gymcard__dato">
+        <span>Vigencia</span>
+        <strong data-vigencia></strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estado -->
+  <div class="bloque">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <span data-badge></span>
+      <span class="sub" data-mensaje style="flex:1"></span>
+    </div>
+  </div>
+
+  <!-- Asistencia -->
+  <div class="bloque">
+    <h3>Tu asistencia</h3>
+    <div class="datos-grid">
+      <div class="dato">
+        <span>Este mes</span>
+        <strong data-visitas-mes></strong>
+      </div>
+      <div class="dato">
+        <span>Total acumulado</span>
+        <strong data-visitas-total></strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Últimas visitas -->
+  <div class="bloque" data-bloque-visitas hidden>
+    <h3>Últimas visitas</h3>
+    <div class="chips" data-chips-visitas></div>
+  </div>
+
+  <a class="btn btn--wa btn--full" data-wa target="_blank" rel="noopener"
+     style="margin-bottom:10px">
+    Escribirle al gym por WhatsApp
+  </a>
+
+  <button class="btn btn--ghost btn--full btn--sm" data-salir>Cerrar sesión</button>
+</template>
+
+<script src="/js/credencial.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel — Pagoda Fitness Center</title>
+  <meta name="theme-color" content="#0A0A0A" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gemunu+Libre:wght@800&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/panel.css" />
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- ══════════════════════════════════════════
+     LOGIN DEL ADMINISTRADOR
+══════════════════════════════════════════ -->
+<main class="pantalla" id="vistaLogin">
+  <div class="tarjeta">
+    <div class="tarjeta__kanji" aria-hidden="true">管</div>
+
+    <div class="marca">
+      <img src="/sitio/assets/logo.png" alt="Pagoda Fitness Center"
+           onerror="this.style.display='none'" />
+      <h1 class="titulo">PANEL <em>ADMIN</em></h1>
+      <p class="sub">Acceso exclusivo del personal.</p>
+    </div>
+
+    <div class="alerta alerta--error" id="loginError" hidden></div>
+
+    <form id="formAdminLogin" novalidate>
+      <div class="campo">
+        <label for="adminUser">Usuario</label>
+        <input type="text" id="adminUser" placeholder="crys" autocomplete="username" required />
+      </div>
+      <div class="campo">
+        <label for="adminPass">Contraseña</label>
+        <input type="password" id="adminPass" placeholder="••••••••" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="btn btn--red btn--full" id="btnAdminLogin">Entrar</button>
+    </form>
+  </div>
+</main>
+
+<!-- ══════════════════════════════════════════
+     PANEL
+══════════════════════════════════════════ -->
+<div class="admin" id="vistaPanel" hidden>
+  <header class="topbar">
+    <img src="/sitio/assets/logo.png" alt="Pagoda" onerror="this.style.display='none'" />
+    <span class="topbar__tag">Control de socios</span>
+    <div class="topbar__sp"></div>
+    <span class="topbar__user">Sesión de <strong id="adminNombre">—</strong></span>
+    <button class="btn btn--ghost btn--sm" id="btnSalir">Salir</button>
+  </header>
+
+  <div class="contenido">
+    <!-- Métricas (también funcionan como filtros) -->
+    <div class="metricas" id="metricas"></div>
+
+    <!-- Herramientas -->
+    <div class="herramientas">
+      <div class="buscador">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="search" id="buscador" placeholder="Buscar por nombre o teléfono…" />
+      </div>
+
+      <select id="filtroEstado" aria-label="Filtrar por estado">
+        <option value="todos">Todos los estados</option>
+        <option value="activa">Activas</option>
+        <option value="por_vencer">Por vencer</option>
+        <option value="vencida">Vencidas</option>
+        <option value="sin_plan">Sin plan</option>
+        <option value="inactivos">Sin asistir</option>
+      </select>
+
+      <select id="ordenLista" aria-label="Ordenar">
+        <option value="reciente">Más recientes</option>
+        <option value="vencimiento">Por vencimiento</option>
+        <option value="inactividad">Por inactividad</option>
+        <option value="nombre">Por nombre</option>
+      </select>
+    </div>
+
+    <!-- Tabla -->
+    <div class="tabla-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Socio</th>
+            <th>Plan</th>
+            <th>Estado</th>
+            <th>Vence</th>
+            <th>Última visita</th>
+            <th>Mes</th>
+            <th style="text-align:right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoTabla"></tbody>
+      </table>
+      <div class="vacio" id="sinResultados" hidden>
+        <span class="kanji">空</span>
+        No hay socios que coincidan con este filtro.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL LATERAL — DETALLE DEL SOCIO
+══════════════════════════════════════════ -->
+<div class="overlay" id="overlay"></div>
+
+<aside class="panel" id="panelSocio" aria-hidden="true">
+  <div class="panel__head">
+    <div class="avatar" id="pAvatar">—</div>
+    <div>
+      <h2 id="pNombre">—</h2>
+      <div class="tel" id="pTelefono">—</div>
+    </div>
+    <button class="panel__cerrar" id="pCerrar" aria-label="Cerrar">&times;</button>
+  </div>
+
+  <div class="panel__body" id="pCuerpo"></div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>

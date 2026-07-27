@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regístrate — Pagoda Fitness Center</title>
+  <meta name="description" content="Registra tu membresía en Pagoda Fitness Center." />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gemunu+Libre:wght@800&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/panel.css" />
+</head>
+<body>
+<div class="grain"></div>
+
+<main class="pantalla">
+  <div class="tarjeta">
+    <div class="tarjeta__kanji" aria-hidden="true">力</div>
+
+    <div class="marca">
+      <img src="/sitio/assets/logo.png" alt="Pagoda Fitness Center"
+           onerror="this.style.display='none'" />
+      <h1 class="titulo" id="tituloVista">ÚNETE A <em>PAGODA</em></h1>
+      <p class="sub" id="subVista">Regístrate una vez y llevamos tu progreso contigo.</p>
+    </div>
+
+    <div class="alerta alerta--error" id="alertaError" hidden></div>
+    <div class="alerta alerta--ok"    id="alertaOk"    hidden></div>
+
+    <!-- ══════════ REGISTRO ══════════ -->
+    <form id="formRegistro" novalidate>
+      <div class="campo">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Juan" autocomplete="given-name" required />
+      </div>
+
+      <div class="campo">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Pérez García" autocomplete="family-name" required />
+      </div>
+
+      <div class="campo">
+        <label for="telefono">Teléfono celular</label>
+        <div class="tel-wrap">
+          <span class="lada">+52</span>
+          <input type="tel" id="telefono" name="telefono" placeholder="2381234567"
+                 inputmode="numeric" maxlength="10" autocomplete="tel-national" required />
+        </div>
+        <p class="ayuda">A este número te llegarán los avisos de tu membresía.</p>
+      </div>
+
+      <div class="campo">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" placeholder="Mínimo 6 caracteres"
+               autocomplete="new-password" minlength="6" required />
+        <p class="ayuda">La usarás para consultar tu credencial digital.</p>
+      </div>
+
+      <button type="submit" class="btn btn--red btn--full" id="btnRegistro">
+        Crear mi cuenta
+      </button>
+
+      <p class="alterna">
+        ¿Ya tienes cuenta?
+        <button type="button" id="irLogin">Inicia sesión</button>
+      </p>
+    </form>
+
+    <!-- ══════════ LOGIN ══════════ -->
+    <form id="formLogin" novalidate hidden>
+      <div class="campo">
+        <label for="loginTel">Teléfono celular</label>
+        <div class="tel-wrap">
+          <span class="lada">+52</span>
+          <input type="tel" id="loginTel" placeholder="2381234567"
+                 inputmode="numeric" maxlength="10" autocomplete="tel-national" required />
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="loginPass">Contraseña</label>
+        <input type="password" id="loginPass" placeholder="Tu contraseña"
+               autocomplete="current-password" required />
+      </div>
+
+      <button type="submit" class="btn btn--red btn--full" id="btnLogin">
+        Entrar
+      </button>
+
+      <p class="alterna">
+        ¿Aún no te registras?
+        <button type="button" id="irRegistro">Crear cuenta</button>
+      </p>
+    </form>
+  </div>
+</main>
+
+<script src="/js/registro.js"></script>
+</body>
+</html>
