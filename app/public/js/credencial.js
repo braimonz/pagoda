@@ -82,7 +82,7 @@ function render({ socio, visitas }) {
 }
 
 /* ---------- Carga inicial ---------- */
-fetch('/api/yo')
+(window.__promesaYo || fetch('/api/yo'))
   .then((r) => {
     if (!r.ok) throw new Error('sin sesión');
     return r.json();

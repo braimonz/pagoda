@@ -11,91 +11,175 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gemunu+Libre:wght@800&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/panel.css" />
 </head>
-<body>
+<body class="body--auth">
 <div class="grain"></div>
 
-<main class="pantalla">
-  <div class="tarjeta">
-    <div class="tarjeta__kanji" aria-hidden="true">力</div>
+<div class="auth">
 
-    <div class="marca">
-      <img src="/sitio/assets/logo.png" alt="Pagoda Fitness Center"
-           onerror="this.style.display='none'" />
-      <h1 class="titulo" id="tituloVista">ÚNETE A <em>PAGODA</em></h1>
-      <p class="sub" id="subVista">Regístrate una vez y llevamos tu progreso contigo.</p>
+  <!-- ══════════════════════════════════════════
+       PANEL IZQUIERDO — MARCA
+  ══════════════════════════════════════════ -->
+  <aside class="auth__brand">
+    <div class="auth__brand-bg">
+      <img src="/sitio/assets/hero-bg.jpg" alt="" onerror="this.remove()"
+           fetchpriority="low" decoding="async" />
+      <div class="auth__brand-overlay"></div>
+      <div class="auth__brand-texture"></div>
     </div>
 
-    <div class="alerta alerta--error" id="alertaError" hidden></div>
-    <div class="alerta alerta--ok"    id="alertaOk"    hidden></div>
+    <div class="auth__verticals" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
 
-    <!-- ══════════ REGISTRO ══════════ -->
-    <form id="formRegistro" novalidate>
-      <div class="campo">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Juan" autocomplete="given-name" required />
-      </div>
+    <div class="auth__seal" aria-hidden="true">力</div>
 
-      <div class="campo">
-        <label for="apellidos">Apellidos</label>
-        <input type="text" id="apellidos" name="apellidos" placeholder="Pérez García" autocomplete="family-name" required />
-      </div>
+    <div class="auth__brand-inner">
+      <img class="auth__logo" src="/sitio/assets/logo.png"
+           alt="Pagoda Fitness Center" onerror="this.remove()" />
 
-      <div class="campo">
-        <label for="telefono">Teléfono celular</label>
-        <div class="tel-wrap">
-          <span class="lada">+52</span>
-          <input type="tel" id="telefono" name="telefono" placeholder="2381234567"
-                 inputmode="numeric" maxlength="10" autocomplete="tel-national" required />
-        </div>
-        <p class="ayuda">A este número te llegarán los avisos de tu membresía.</p>
-      </div>
+      <h2 class="auth__claim">
+        <span class="a-word" style="--d:0ms">AQUÍ</span>
+        <span class="a-word a-word--stroke" style="--d:90ms">NO</span>
+        <span class="a-word" style="--d:180ms">ENTRENAS</span>
+        <span class="a-word a-word--outline" style="--d:270ms">SOLO</span>
+      </h2>
 
-      <div class="campo">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" placeholder="Mínimo 6 caracteres"
-               autocomplete="new-password" minlength="6" required />
-        <p class="ayuda">La usarás para consultar tu credencial digital.</p>
-      </div>
-
-      <button type="submit" class="btn btn--red btn--full" id="btnRegistro">
-        Crear mi cuenta
-      </button>
-
-      <p class="alterna">
-        ¿Ya tienes cuenta?
-        <button type="button" id="irLogin">Inicia sesión</button>
+      <p class="auth__claim-sub">
+        Regístrate una sola vez. A partir de ahí te conocemos
+        por tu nombre y llevamos tu progreso contigo.
       </p>
-    </form>
 
-    <!-- ══════════ LOGIN ══════════ -->
-    <form id="formLogin" novalidate hidden>
-      <div class="campo">
-        <label for="loginTel">Teléfono celular</label>
-        <div class="tel-wrap">
-          <span class="lada">+52</span>
-          <input type="tel" id="loginTel" placeholder="2381234567"
-                 inputmode="numeric" maxlength="10" autocomplete="tel-national" required />
+      <ul class="auth__perks">
+        <li>Tu credencial digital siempre a la mano</li>
+        <li>Avisos de tu membresía por WhatsApp</li>
+        <li>Test físico de bienvenida sin costo</li>
+        <li>Acompañamiento de un coach desde el día uno</li>
+      </ul>
+
+      <div class="auth__stats">
+        <div><strong>300+</strong><span>Guerreros</span></div>
+        <div class="auth__stats-line"></div>
+        <div><strong>8+</strong><span>Años</span></div>
+        <div class="auth__stats-line"></div>
+        <div><strong>5★</strong><span>Valoración</span></div>
+      </div>
+    </div>
+
+    <div class="auth__ticker-wrap" aria-hidden="true">
+      <div class="auth__ticker" id="ticker">
+        <span>AQUÍ NO ENTRENAS SOLO</span><span class="k">力</span>
+        <span>COACHES ATENTOS</span><span class="k">功</span>
+        <span>COMUNIDAD REAL</span><span class="k">武</span>
+        <span>NUNCA SOLO</span><span class="k">道</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════
+       PANEL DERECHO — FORMULARIO
+  ══════════════════════════════════════════ -->
+  <main class="auth__panel">
+    <div class="auth__panel-glow" aria-hidden="true"></div>
+
+    <div class="auth__form-box">
+
+      <!-- Logo solo visible en móvil -->
+      <img class="auth__logo auth__logo--mobile" src="/sitio/assets/logo.png"
+           alt="Pagoda Fitness Center" onerror="this.remove()" />
+
+      <header class="auth__head">
+        <span class="kicker" id="kickerVista">Registro de socios</span>
+        <h1 class="titulo" id="tituloVista">ÚNETE A <em>PAGODA</em></h1>
+        <p class="sub" id="subVista">Regístrate una vez y llevamos tu progreso contigo.</p>
+      </header>
+
+      <div class="alerta alerta--error" id="alertaError" hidden></div>
+      <div class="alerta alerta--ok"    id="alertaOk"    hidden></div>
+
+      <!-- ══════════ REGISTRO ══════════ -->
+      <form id="formRegistro" novalidate>
+        <div class="fila">
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Juan"
+                   autocomplete="given-name" required />
+          </div>
+
+          <div class="campo">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" name="apellidos" placeholder="Pérez García"
+                   autocomplete="family-name" required />
+          </div>
         </div>
-      </div>
 
-      <div class="campo">
-        <label for="loginPass">Contraseña</label>
-        <input type="password" id="loginPass" placeholder="Tu contraseña"
-               autocomplete="current-password" required />
-      </div>
+        <div class="campo">
+          <label for="telefono">Teléfono celular</label>
+          <div class="tel-wrap">
+            <span class="lada">+52</span>
+            <input type="tel" id="telefono" name="telefono" placeholder="238 123 4567"
+                   inputmode="numeric" maxlength="10" autocomplete="tel-national" required />
+          </div>
+          <p class="ayuda">A este número te llegarán los avisos de tu membresía.</p>
+        </div>
 
-      <button type="submit" class="btn btn--red btn--full" id="btnLogin">
-        Entrar
-      </button>
+        <div class="campo">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" placeholder="Mínimo 6 caracteres"
+                 autocomplete="new-password" minlength="6" required />
+          <p class="ayuda">La usarás para consultar tu credencial digital.</p>
+        </div>
 
-      <p class="alterna">
-        ¿Aún no te registras?
-        <button type="button" id="irRegistro">Crear cuenta</button>
+        <button type="submit" class="btn btn--red btn--full btn--lg" id="btnRegistro">
+          Crear mi cuenta <span class="btn__arrow">→</span>
+        </button>
+
+        <p class="alterna">
+          ¿Ya tienes cuenta?
+          <button type="button" id="irLogin">Inicia sesión</button>
+        </p>
+      </form>
+
+      <!-- ══════════ LOGIN ══════════ -->
+      <form id="formLogin" novalidate hidden>
+        <div class="campo">
+          <label for="loginTel">Teléfono celular</label>
+          <div class="tel-wrap">
+            <span class="lada">+52</span>
+            <input type="tel" id="loginTel" placeholder="238 123 4567"
+                   inputmode="numeric" maxlength="10" autocomplete="tel-national" required />
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="loginPass">Contraseña</label>
+          <input type="password" id="loginPass" placeholder="Tu contraseña"
+                 autocomplete="current-password" required />
+        </div>
+
+        <button type="submit" class="btn btn--red btn--full btn--lg" id="btnLogin">
+          Entrar <span class="btn__arrow">→</span>
+        </button>
+
+        <p class="alterna">
+          ¿Aún no te registras?
+          <button type="button" id="irRegistro">Crear cuenta</button>
+        </p>
+      </form>
+
+      <p class="auth__legal">
+        Tus datos se usan únicamente para administrar tu membresía.
       </p>
-    </form>
-  </div>
-</main>
+    </div>
+  </main>
+</div>
 
 <script src="/js/registro.js"></script>
+<script>
+  // Duplica el ticker para que el loop sea continuo
+  (function () {
+    var t = document.getElementById('ticker');
+    if (t) t.innerHTML += t.innerHTML;
+  })();
+</script>
 </body>
 </html>

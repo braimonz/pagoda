@@ -9,6 +9,7 @@ const alertaError  = $('#alertaError');
 const alertaOk     = $('#alertaOk');
 const titulo       = $('#tituloVista');
 const sub          = $('#subVista');
+const kicker       = $('#kickerVista');
 
 /* ---------- Utilidades de UI ---------- */
 function limpiarAlertas() {
@@ -29,8 +30,14 @@ function exito(msg) {
 }
 
 function cargando(btn, activo, textoOriginal) {
+  // Guarda el HTML original la primera vez para no perder la flecha del botón
+  if (!btn.dataset.htmlOriginal) btn.dataset.htmlOriginal = btn.innerHTML;
   btn.disabled = activo;
-  btn.textContent = activo ? 'Un momento…' : textoOriginal;
+  if (activo) {
+    btn.textContent = 'Un momento…';
+  } else {
+    btn.innerHTML = btn.dataset.htmlOriginal;
+  }
 }
 
 /* ---------- Alternar vistas ---------- */
@@ -40,6 +47,7 @@ function mostrarLogin() {
   formLogin.hidden = false;
   titulo.innerHTML = 'BIENVENIDO <em>DE VUELTA</em>';
   sub.textContent = 'Entra para ver tu credencial y tu membresía.';
+  if (kicker) kicker.textContent = 'Acceso de socios';
 }
 
 function mostrarRegistro() {
@@ -48,6 +56,7 @@ function mostrarRegistro() {
   formRegistro.hidden = false;
   titulo.innerHTML = 'ÚNETE A <em>PAGODA</em>';
   sub.textContent = 'Regístrate una vez y llevamos tu progreso contigo.';
+  if (kicker) kicker.textContent = 'Registro de socios';
 }
 
 $('#irLogin').addEventListener('click', mostrarLogin);

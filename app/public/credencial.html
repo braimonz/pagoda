@@ -9,9 +9,36 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gemunu+Libre:wght@800&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/panel.css" />
+  <script>
+    // Arranca la petición de datos de inmediato, antes de que el navegador
+    // se ponga a bajar las imágenes de fondo y las tipografías. Así la
+    // credencial aparece rápido aunque la conexión del gym vaya lenta.
+    window.__promesaYo = fetch('/api/yo');
+  </script>
 </head>
-<body>
+<body class="body--cred">
 <div class="grain"></div>
+
+<!-- Fondo con la foto del gym + textura -->
+<div class="cred-bg" aria-hidden="true">
+  <img src="/sitio/assets/hero-bg.jpg" alt="" onerror="this.remove()"
+       fetchpriority="low" decoding="async" loading="lazy" />
+  <div class="cred-bg__overlay"></div>
+  <div class="cred-bg__texture"></div>
+</div>
+
+<div class="cred-verticals" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<div class="cred-seal" aria-hidden="true">証</div>
+
+<!-- Barra superior -->
+<header class="cred-topbar">
+  <img src="/sitio/assets/logo.png" alt="Pagoda Fitness Center"
+       onerror="this.remove()" />
+  <span class="kicker">Credencial digital</span>
+</header>
 
 <main class="pantalla">
   <div class="tarjeta" id="contenedor">
@@ -19,6 +46,23 @@
     <p class="sub" style="text-align:center">Cargando tu credencial…</p>
   </div>
 </main>
+
+<!-- Ticker inferior -->
+<div class="cred-ticker-wrap" aria-hidden="true">
+  <div class="cred-ticker" id="credTicker">
+    <span>AQUÍ NO ENTRENAS SOLO</span><span class="k">力</span>
+    <span>COACHES ATENTOS</span><span class="k">功</span>
+    <span>COMUNIDAD REAL</span><span class="k">武</span>
+    <span>NUNCA SOLO</span><span class="k">道</span>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var t = document.getElementById('credTicker');
+    if (t) t.innerHTML += t.innerHTML;
+  })();
+</script>
 
 <template id="tplCredencial">
   <div class="tarjeta__kanji" aria-hidden="true">証</div>
