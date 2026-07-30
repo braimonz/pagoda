@@ -16,9 +16,13 @@ npm start
 
 | Ruta | Para quién | Qué hace |
 |---|---|---|
+| `/` | **Público** | Sitio de marketing (la landing de la raíz del repo). |
 | `/registro` | **Socio** | Destino del código QR. Alta e inicio de sesión. |
 | `/credencial` | **Socio** | GymCard digital: plan, vigencia y asistencia. |
 | `/admin` | **Personal** | Panel de control de socios. |
+
+Un solo servidor sirve tanto el sitio público como la app de socios, así que
+todo vive bajo el mismo dominio y basta un certificado HTTPS.
 
 Usuario inicial: `crys` / la contraseña que definas en `.env` (por defecto `pagoda2025`).
 
@@ -114,3 +118,10 @@ Está en `.gitignore` porque contiene datos personales de los socios.
 3. Cambiar el número del gimnasio en `public/js/credencial.js` (`WHATSAPP_GYM`).
 4. Programar respaldos periódicos de `app/data/pagoda.db`.
 5. Añadir recuperación de contraseña para el socio (hoy no existe).
+6. Si el hosting borra el disco en cada despliegue, montar un volumen
+   persistente en `app/data/` o se pierden todos los socios.
+
+> **Sobre los archivos estáticos:** el servidor expone únicamente `index.html`,
+> `styles.css`, `script.js` y `assets/`. No montes la raíz del repositorio con
+> `express.static`: dejaría `app/data/pagoda.db`, `app/.env` y `.git/`
+> descargables desde el navegador.

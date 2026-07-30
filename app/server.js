@@ -26,9 +26,17 @@ const COOKIE_OPTS = {
 
 app.use(express.json());
 app.use(cookieParser());
+
+// Archivos de la app de socios (css, js de las pantallas).
 app.use(express.static(path.join(__dirname, 'public')));
-// El sitio público (landing) vive un nivel arriba
-app.use('/sitio', express.static(path.join(__dirname, '..')));
+
+/* El sitio público vive un nivel arriba, junto al código del servidor.
+   Se exponen SOLO sus archivos, nunca la carpeta completa: servir la raíz
+   dejaría al alcance de cualquiera app/data/pagoda.db, app/.env y .git/. */
+const RAIZ = path.join(__dirname, '..');
+app.use('/assets', express.static(path.join(RAIZ, 'assets')));
+app.get('/styles.css', (_req, res) => res.sendFile(path.join(RAIZ, 'styles.css')));
+app.get('/script.js',  (_req, res) => res.sendFile(path.join(RAIZ, 'script.js')));
 
 /* ------------------------------------------------------------
    UTILIDADES
@@ -301,12 +309,13 @@ app.delete('/api/admin/socios/:id', requiereAdmin, (req, res) => {
 ------------------------------------------------------------ */
 const pagina = (f) => (_req, res) => res.sendFile(path.join(__dirname, 'public', f));
 
-app.get('/',           pagina('registro.html'));
+// La raíz es el sitio público; la app de socios cuelga de sus propias rutas.
+app.get('/',           (_req, res) => res.sendFile(path.join(RAIZ, 'index.html')));
 app.get('/registro',   pagina('registro.html'));
 app.get('/credencial', pagina('credencial.html'));
 app.get('/admin',      pagina('admin.html'));
 
-app.use((_req, res) => res.status(404).sendFile(path.join(__dirname, 'public', 'registro.html')));
+app.use((_req, res) => res.status(404).sendFile(path.join(RAIZ, 'index.html')));
 
 app.listen(PORT, () => {
   console.log(`\n  🔴 PAGODA — sistema de socios`);

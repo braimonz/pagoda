@@ -335,7 +335,7 @@ input, select, textarea, button { font-family: inherit; font-size: inherit; }
 .auth__brand-texture {
   position: absolute;
   inset: 0;
-  background: url('/sitio/assets/texture-red.jpg') center/cover no-repeat;
+  background: url('/assets/texture-red.jpg') center/cover no-repeat;
   opacity: 0.13;
   mix-blend-mode: overlay;
   pointer-events: none;
@@ -495,7 +495,7 @@ input, select, textarea, button { font-family: inherit; font-size: inherit; }
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/sitio/assets/texture-red.jpg') center/cover no-repeat;
+  background: url('/assets/texture-red.jpg') center/cover no-repeat;
   opacity: 0.2;
   mix-blend-mode: multiply;
   pointer-events: none;
@@ -630,7 +630,7 @@ input, select, textarea, button { font-family: inherit; font-size: inherit; }
 .cred-bg__texture {
   position: absolute;
   inset: 0;
-  background: url('/sitio/assets/texture-dark.jpg') center/cover no-repeat;
+  background: url('/assets/texture-dark.jpg') center/cover no-repeat;
   opacity: 0.35;
   mix-blend-mode: overlay;
 }
@@ -689,7 +689,7 @@ input, select, textarea, button { font-family: inherit; font-size: inherit; }
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/sitio/assets/texture-red.jpg') center/cover no-repeat;
+  background: url('/assets/texture-red.jpg') center/cover no-repeat;
   opacity: 0.2;
   mix-blend-mode: multiply;
   pointer-events: none;
