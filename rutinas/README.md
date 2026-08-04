@@ -35,8 +35,8 @@ app.use('/rutinas', express.static(path.join(RAIZ, 'rutinas/dist')));
 ## Estado actual
 
 Implementado: **el constructor de rutinas en tres pasos** — carga del JSON,
-elección múltiple de grupos y de ejercicios, y organización de la semana con
-arrastrar y soltar.
+elección múltiple de grupos y de ejercicios, organización de la semana con
+arrastrar y soltar, y compartir la rutina por enlace.
 
 ```
 Paso 1 · Grupos        Paso 2 · Ejercicios      Paso 3 · Semana
@@ -64,6 +64,36 @@ Paso 1 · Grupos        Paso 2 · Ejercicios      Paso 3 · Semana
   que la semana y la selección nunca digan cosas distintas.
 - **Se permite repetir**: cada instancia lleva su propio `uid`, así que el mismo
   press de banca puede estar el lunes y el viernes y quitar uno no quita el otro.
+
+### Compartir por enlace
+
+La rutina entera viaja dentro de la URL: no hace falta servidor ni base de datos.
+
+```
+Semana → rutinaAJson()  → {"v":1,"d":{"lun":["press-banca-barra",…],…}}
+       → codificarRutina() → base64url
+       → crearEnlaceRutina() → https://pagoda.mx/rutinas/?data=eyJ2Ijox…
+```
+
+Al abrir un enlace con `?data=`, `useRutinaCompartida` decodifica, valida con zod,
+coteja cada id contra el catálogo y entra directo al paso 3. Una rutina de seis
+ejercicios ocupa 154 bytes de JSON y 206 caracteres de base64url.
+
+Cuatro decisiones:
+
+- **Alfabeto URL (RFC 4648 §5), no base64 clásico.** En una query, el `+` del
+  base64 normal se interpreta como espacio y la rutina llega rota. Se cambian
+  `+/` por `-_` y se quita el relleno.
+- **Solo viajan los ids**, ni el `uid` de cada instancia —local, se regenera— ni
+  el grupo, que se deduce del catálogo. Copiar el ejercicio entero congelaría los
+  datos: al corregir una descripción, el enlace seguiría enseñando la vieja.
+- **Claves de una letra y días vacíos omitidos.** Cada carácter del JSON se infla
+  un 33 % al pasar a base64 y acaba en una URL que alguien pega en WhatsApp.
+- **La URL se limpia con `replaceState` tras importar.** Sin eso, recargar
+  volvería a importar y pisaría los cambios hechos después de abrir el enlace.
+
+Los ids que ya no existen en el catálogo se descartan y se dice cuántos; un
+enlace corrupto o de una versión más nueva avisa sin romper la app.
 
 ### Arrastrar y soltar
 
@@ -94,6 +124,7 @@ src/
 │   ├── muscleGroups.ts                nombre y kanji de cada grupo
 │   └── labels.ts                      equipo y nivel en texto visible
 ├── lib/
+│   ├── base64url.ts                   codificación segura para URLs
 │   ├── cn.ts                          clases condicionales sin conflictos
 │   ├── motion.ts                      vocabulario de animación compartido
 │   └── errors.ts                      mensaje de usuario vs. detalle técnico
@@ -109,6 +140,7 @@ src/
 ├── features/
 │   ├── exercises/                     PasoGrupos · PasoEjercicios · tarjetas
 │   └── routine/                       PasoSemana · DiaSeccion · TarjetaAsignada
+│       └── utils/compartir.ts         rutina ↔ JSON ↔ base64url ↔ enlace
 └── app/ConstructorRutina.tsx          orquesta los tres pasos
 ```
 
@@ -173,4 +205,6 @@ Tres decisiones que conviene conocer antes de tocar esto:
   que define `ARQUITECTURA.md` §7— y por eso la barra todavía no dice «guardado».
 - Series, repeticiones y descanso por ejercicio: el esquema ya los admite, pero
   ni el JSON los trae ni la tarjeta de la semana los deja editar.
-- Router, resumen y compartir — las pantallas ⑥ y ⑦ de `DISENO-UX.md`.
+- Router y resumen — la pantalla ⑥ de `DISENO-UX.md`.
+- Compartir como imagen: hoy el panel genera enlace y mensaje de WhatsApp, pero
+  no la tarjeta 9:16 que describe la pantalla ⑦.

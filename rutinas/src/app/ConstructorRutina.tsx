@@ -5,11 +5,15 @@ import { AppShell } from '@/components/layout/AppShell';
 import { BarraInferior } from '@/components/layout/BarraInferior';
 import { TopBar } from '@/components/layout/TopBar';
 import { Button } from '@/components/ui/Button';
+import { Toast } from '@/components/ui/Toast';
 import { PasoEjercicios } from '@/features/exercises/components/PasoEjercicios';
 import { PasoGrupos } from '@/features/exercises/components/PasoGrupos';
 import { useExercisesByGroups } from '@/features/exercises/hooks/useExercisesByGroups';
 import { BarraSemana } from '@/features/routine/components/BarraSemana';
+import { CompartirSheet } from '@/features/routine/components/CompartirSheet';
 import { PasoSemana } from '@/features/routine/components/PasoSemana';
+import { useExerciseIndex } from '@/features/routine/hooks/useExerciseIndex';
+import { useRutinaCompartida } from '@/features/routine/hooks/useRutinaCompartida';
 import { pantalla } from '@/lib/motion';
 import { useRutina } from '@/store/rutina.store';
 import { useSeleccion, useTotalEjercicios, useTotalGrupos } from '@/store/seleccion.store';
@@ -37,6 +41,8 @@ const ETIQUETA_ATRAS: Record<Paso, string> = {
  */
 export function ConstructorRutina() {
   const [paso, setPaso] = useState<Paso>('grupos');
+  const [compartiendo, setCompartiendo] = useState(false);
+  const [aviso, setAviso] = useState<string | null>(null);
 
   const gruposSeleccionados = useSeleccion((estado) => estado.grupos);
   const ejerciciosSeleccionados = useSeleccion((estado) => estado.ejercicios);
@@ -45,6 +51,18 @@ export function ConstructorRutina() {
 
   const sincronizar = useRutina((estado) => estado.sincronizar);
   const secciones = useExercisesByGroups(gruposSeleccionados);
+
+  /* Si la URL trae ?data=, la rutina se reconstruye y se entra directo a
+     la semana: quien abre un enlace compartido quiere ver la rutina, no
+     empezar eligiendo grupos. */
+  const catalogo = useExerciseIndex();
+  const compartida = useRutinaCompartida(catalogo.datos, catalogo.estado === 'listo');
+
+  useEffect(() => {
+    if (compartida.mensaje === null) return;
+    setAviso(compartida.mensaje);
+    if (compartida.estado === 'importada') setPaso('semana');
+  }, [compartida.estado, compartida.mensaje]);
 
   const atras = ANTERIOR[paso];
 
@@ -111,7 +129,11 @@ export function ConstructorRutina() {
         />
       )}
 
-      {paso === 'semana' && <BarraSemana />}
+      {paso === 'semana' && <BarraSemana onCompartir={() => setCompartiendo(true)} />}
+
+      <CompartirSheet abierto={compartiendo} onCerrar={() => setCompartiendo(false)} />
+
+      <Toast mensaje={aviso} onCerrar={() => setAviso(null)} duracionMs={5000} />
     </AppShell>
   );
 }

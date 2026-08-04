@@ -1,17 +1,22 @@
 import { motion } from 'framer-motion';
 
+import { Button } from '@/components/ui/Button';
 import { Contador } from '@/components/ui/Contador';
 import { SUAVE } from '@/lib/motion';
 import { useDiasConEjercicios, useTotalAsignados } from '@/store/rutina.store';
 
+interface BarraSemanaProps {
+  readonly onCompartir: () => void;
+}
+
 /**
- * Resumen vivo de la semana.
+ * Resumen vivo de la semana y acceso a compartir.
  *
  * No lleva botón de guardar: la rutina se actualiza sola en cuanto se
  * mueve, se añade o se quita algo. Un botón "Guardar" que no guardase nada
  * sería mentir; cuando exista la persistencia, aquí irá el indicador.
  */
-export function BarraSemana() {
+export function BarraSemana({ onCompartir }: BarraSemanaProps) {
   const total = useTotalAsignados();
   const dias = useDiasConEjercicios();
 
@@ -39,7 +44,14 @@ export function BarraSemana() {
           </span>
         </p>
 
-        <span className="ml-auto text-xs text-ink-mute">Se actualiza solo</span>
+        <Button
+          onClick={onCompartir}
+          disabled={total === 0}
+          aria-disabled={total === 0}
+          className="ml-auto shrink-0"
+        >
+          Compartir
+        </Button>
       </div>
     </motion.div>
   );

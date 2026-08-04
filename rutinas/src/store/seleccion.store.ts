@@ -18,6 +18,8 @@ interface EstadoSeleccion {
   alternarEjercicio: (ejercicio: Exercise) => void;
   /** Lo marca como elegido si no lo estaba. Idempotente, a diferencia de alternar. */
   asegurarSeleccionado: (ejercicio: Exercise) => void;
+  /** Sustituye la selección entera. La usa la importación desde un enlace. */
+  reemplazar: (grupos: readonly MuscleGroupId[], ejercicios: readonly EjercicioSeleccionado[]) => void;
   reiniciar: () => void;
 }
 
@@ -73,6 +75,8 @@ export const useSeleccion = create<EstadoSeleccion>()((set) => ({
             ],
           },
     ),
+
+  reemplazar: (grupos, ejercicios) => set({ grupos, ejercicios }),
 
   reiniciar: () => set({ grupos: [], ejercicios: [] }),
 }));

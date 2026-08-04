@@ -26,6 +26,8 @@ interface EstadoRutina {
   quitar: (uid: string) => void;
   /** Mueve una instancia a un día y posición. Sirve para reordenar y para cambiar de día. */
   mover: (uid: string, diaDestino: DiaId, indice: number) => void;
+  /** Sustituye la semana entera. La usa la importación desde un enlace. */
+  reemplazar: (semana: Semana) => void;
   vaciar: () => void;
 }
 
@@ -130,6 +132,8 @@ export const useRutina = create<EstadoRutina>()((set) => ({
         },
       };
     }),
+
+  reemplazar: (semana) => set({ semana }),
 
   vaciar: () => set({ semana: semanaVacia() }),
 }));
