@@ -1,5 +1,10 @@
+import { motion } from 'framer-motion';
+
+import { lista } from '@/lib/motion';
 import type { MuscleGroupSummary } from '@/services/exercises.service';
 import type { MuscleGroupId } from '@/types/exercise';
+
+import { MuscleGroupCard } from './MuscleGroupCard';
 
 interface MuscleGroupListProps {
   readonly grupos: readonly MuscleGroupSummary[];
@@ -7,31 +12,31 @@ interface MuscleGroupListProps {
 }
 
 /**
- * Los grupos musculares disponibles. Componente de presentación puro: no
- * carga nada ni conoce el estado de la pantalla, solo pinta lo que recibe.
+ * Rejilla de grupos musculares.
  *
- * Sin estilos todavía: HTML semántico a propósito. La lista es una <ul> y
- * cada grupo un <button> real, de modo que el teclado y los lectores de
- * pantalla ya funcionan antes de escribir la primera línea de CSS.
+ * Dos columnas en móvil —tarjetas de ~160 px, cómodas para el pulgar—,
+ * tres a partir de tablet. El escalonado lo dispara este contenedor; cada
+ * tarjeta solo declara su variante.
  */
 export function MuscleGroupList({ grupos, onSeleccionar }: MuscleGroupListProps) {
   if (grupos.length === 0) {
-    return <p role="status">El catálogo no tiene ningún grupo muscular con ejercicios.</p>;
+    return (
+      <p role="status" className="py-16 text-center text-sm text-ink-mute">
+        El catálogo no tiene ningún grupo muscular con ejercicios.
+      </p>
+    );
   }
 
   return (
-    <ul>
+    <motion.div
+      variants={lista}
+      initial="entra"
+      animate="visible"
+      className="grid grid-cols-2 gap-3 sm:grid-cols-3"
+    >
       {grupos.map((grupo) => (
-        <li key={grupo.id}>
-          <button type="button" onClick={() => onSeleccionar(grupo.id)}>
-            <span aria-hidden="true">{grupo.kanji}</span>{' '}
-            <strong>{grupo.nombre}</strong>{' '}
-            <span>
-              {grupo.total} {grupo.total === 1 ? 'ejercicio' : 'ejercicios'}
-            </span>
-          </button>
-        </li>
+        <MuscleGroupCard key={grupo.id} grupo={grupo} onSeleccionar={onSeleccionar} />
       ))}
-    </ul>
+    </motion.div>
   );
 }

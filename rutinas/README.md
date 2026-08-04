@@ -34,23 +34,56 @@ app.use('/rutinas', express.static(path.join(RAIZ, 'rutinas/dist')));
 
 ## Estado actual
 
-Implementado: **carga del catálogo y navegación grupo → ejercicios**, sin estilos.
+Implementado: **catálogo de ejercicios completo** — carga del JSON, navegación
+grupo → ejercicios e interfaz con Tailwind y Framer Motion.
 
 ```
 src/
+├── styles/
+│   ├── index.css                      tema: @theme con todos los tokens
+│   └── fonts.css                      tipografías alojadas en el proyecto
+├── assets/fonts/                      3 woff2 · 88 KB · subconjunto latin
 ├── types/exercise.ts                  vocabularios + esquema zod (tipo y validación
 │                                      salen de la misma declaración)
 ├── config/
 │   ├── muscleGroups.ts                nombre y kanji de cada grupo
 │   └── labels.ts                      equipo y nivel en texto visible
-├── lib/errors.ts                      error con mensaje de usuario y detalle técnico
+├── lib/
+│   ├── cn.ts                          clases condicionales sin conflictos
+│   ├── motion.ts                      vocabulario de animación compartido
+│   └── errors.ts                      mensaje de usuario vs. detalle técnico
 ├── services/exercises.service.ts      única puerta a los datos
 ├── hooks/useAsync.ts                  cargando / listo / error + reintentar
+├── components/
+│   ├── ui/                            Button · Chip · Skeleton
+│   ├── layout/                        AppShell · Contenido · TopBar
+│   └── brand/Grain.tsx                textura del sitio
 └── features/exercises/
     ├── hooks/                         useMuscleGroups · useExercisesByGroup
-    ├── components/                    MuscleGroupList · ExerciseList · EstadoRecurso
+    ├── components/                    MuscleGroupCard · ExerciseCard · EstadoRecurso
     └── pages/ExercisesPage.tsx        único componente con estado
 ```
+
+### Sistema visual
+
+Paleta oscura sobre tres superficies y un solo color de acción:
+
+| Token | Valor | Uso |
+|---|---|---|
+| `bg-base` | `#111111` | lienzo |
+| `bg-surface` | `#181818` | tarjetas |
+| `bg-elevated` | `#232323` | chips, botón secundario, baldosas |
+| `text-accent` / `bg-accent` | `#22C55E` | **solo acciones** |
+| `text-on-accent` | `#06130B` | texto sobre el verde |
+| `text-ink` / `-soft` / `-mute` | blanco al 100 / 68 / 42 % | jerarquía de texto |
+
+Ningún componente escribe un color en hexadecimal: todo pasa por `@theme` en
+`styles/index.css`. Si un valor no está declarado ahí, no pertenece al sistema.
+
+Las animaciones viven en `lib/motion.ts` —una curva, cuatro variantes— y ninguna
+pasa de 400 ms. `MotionConfig reducedMotion="user"` hace que toda la app respete
+la preferencia del sistema: quien reduce el movimiento recibe los cambios de
+opacidad pero ningún desplazamiento.
 
 ### Cómo fluyen los datos
 
@@ -80,7 +113,10 @@ Tres decisiones que conviene conocer antes de tocar esto:
 
 ### Pendiente
 
-- Estilos (Tailwind con los tokens de Pagoda).
+- Fotografía de los ejercicios: mientras `imagen` venga vacía, la baldosa de cada
+  ficha lleva su número de orden y la tarjeta de grupo es cuadrada. Con fotos, la
+  tarjeta puede volver al formato vertical 3:4 del documento de diseño.
 - `seriesSugeridas`, `repsSugeridas`, `descansoSugeridoSeg` y `ejecucion` en el
   JSON: el esquema ya los admite como opcionales, pero el catálogo aún no los trae.
-- Router, constructor de rutina y persistencia.
+- Router, constructor de rutina y persistencia — las pantallas ② a ⑦ de
+  `DISENO-UX.md` todavía no existen.
