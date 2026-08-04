@@ -163,6 +163,30 @@ export async function getExercisesByGroup(
   return (await obtenerCatalogo()).porGrupo.get(grupoId) ?? [];
 }
 
+/** Un grupo con sus ejercicios, para listar varios grupos a la vez. */
+export interface SeccionGrupo {
+  readonly grupo: MuscleGroup;
+  readonly ejercicios: readonly Exercise[];
+}
+
+/**
+ * Ejercicios de varios grupos, agrupados y en el orden del catálogo —no en
+ * el orden en que el socio tocó los grupos—, para que la lista no se
+ * reordene sola bajo el dedo al añadir o quitar un grupo.
+ */
+export async function getExercisesByGroups(
+  grupoIds: readonly MuscleGroupId[],
+): Promise<readonly SeccionGrupo[]> {
+  const { porGrupo } = await obtenerCatalogo();
+  const elegidos = new Set(grupoIds);
+
+  return MUSCLE_GROUPS.flatMap<SeccionGrupo>((grupo) => {
+    if (!elegidos.has(grupo.id)) return [];
+    const ejercicios = porGrupo.get(grupo.id) ?? [];
+    return ejercicios.length === 0 ? [] : [{ grupo, ejercicios }];
+  });
+}
+
 /** Catálogo completo. Lo necesitará el buscador global. */
 export async function getExercises(): Promise<readonly Exercise[]> {
   return (await obtenerCatalogo()).ejercicios;

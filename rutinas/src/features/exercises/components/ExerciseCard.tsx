@@ -3,12 +3,14 @@ import { motion } from 'framer-motion';
 import { Chip } from '@/components/ui/Chip';
 import { NOMBRES_EQUIPO, NOMBRES_NIVEL } from '@/config/labels';
 import { nombreMusculo } from '@/config/muscleGroups';
-import { elemento } from '@/lib/motion';
+import { cn } from '@/lib/cn';
+import { elemento, PULSACION, RAPIDA } from '@/lib/motion';
+import { useEjercicioSeleccionado, useSeleccion } from '@/store/seleccion.store';
 import type { Exercise } from '@/types/exercise';
 
 interface ExerciseCardProps {
   readonly ejercicio: Exercise;
-  /** Posición dentro del grupo, empezando en 1. */
+  /** Posición dentro de su grupo, empezando en 1. */
   readonly orden: number;
 }
 
@@ -20,44 +22,54 @@ const COLOR_NIVEL: Record<Exercise['nivel'], string> = {
 };
 
 /**
- * Ficha de un ejercicio.
+ * Ficha de un ejercicio. Toda la tarjeta alterna la selección.
+ *
+ * Es un `<button aria-pressed>` y no un `<div onClick>`: así funciona con
+ * teclado, se anuncia como pulsado o no, y el navegador da el foco solo.
+ * Por eso el nombre va en `<span>` y no en `<h3>` — un encabezado dentro
+ * de un botón no es HTML válido.
  *
  * Mientras `imagen` venga vacía del catálogo, la baldosa lleva el número
- * de orden. Repetir ahí el kanji del grupo llenaba la pantalla con quince
- * copias del mismo glifo —relleno decorativo—; el número, en cambio,
- * informa: el catálogo está ordenado con los básicos primero.
- * El día que haya fotos se sustituye solo ese bloque.
+ * de orden; al seleccionar, el número deja paso a la marca de verificación.
  */
 export function ExerciseCard({ ejercicio, orden }: ExerciseCardProps) {
+  const seleccionado = useEjercicioSeleccionado(ejercicio.id);
+  const alternarEjercicio = useSeleccion((estado) => estado.alternarEjercicio);
+
   return (
-    <motion.article
+    <motion.button
+      type="button"
       variants={elemento}
-      className="flex gap-4 rounded-card border border-line bg-surface p-4 shadow-soft"
+      whileTap={PULSACION}
+      aria-pressed={seleccionado}
+      onClick={() => alternarEjercicio(ejercicio)}
+      className={cn(
+        'flex w-full gap-4 rounded-card border p-4 text-left shadow-soft',
+        'transition-colors duration-200',
+        seleccionado
+          ? 'border-accent-line bg-accent-soft'
+          : 'border-line bg-surface hover:border-line-strong',
+      )}
     >
-      <div className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-tile bg-elevated">
-        {ejercicio.imagen ? (
-          <img
-            src={ejercicio.imagen}
-            alt=""
-            className="size-full object-cover"
-            loading="lazy"
-          />
-        ) : (
-          <span
-            aria-hidden="true"
-            className="font-accent text-xl font-extrabold tabular-nums text-ink-mute"
-          >
-            {String(orden).padStart(2, '0')}
-          </span>
+      <motion.span
+        aria-hidden="true"
+        animate={seleccionado ? { scale: [1, 1.12, 1] } : { scale: 1 }}
+        transition={RAPIDA}
+        className={cn(
+          'grid size-14 shrink-0 place-items-center overflow-hidden rounded-tile',
+          'font-accent text-xl font-extrabold tabular-nums transition-colors duration-200',
+          seleccionado ? 'bg-accent text-on-accent' : 'bg-elevated text-ink-mute',
         )}
-      </div>
+      >
+        {seleccionado ? '✓' : String(orden).padStart(2, '0')}
+      </motion.span>
 
-      <div className="min-w-0 flex-1">
-        <h3 className="text-[0.9375rem] leading-snug font-semibold text-ink">
+      <span className="min-w-0 flex-1">
+        <span className="block text-[0.9375rem] leading-snug font-semibold text-ink">
           {ejercicio.nombre}
-        </h3>
+        </span>
 
-        <div className="mt-2 flex flex-wrap items-center gap-1.5">
+        <span className="mt-2 flex flex-wrap items-center gap-1.5">
           <Chip>{NOMBRES_EQUIPO[ejercicio.equipo]}</Chip>
           <Chip className="gap-1.5">
             <span
@@ -66,18 +78,18 @@ export function ExerciseCard({ ejercicio, orden }: ExerciseCardProps) {
             />
             {NOMBRES_NIVEL[ejercicio.nivel]}
           </Chip>
-        </div>
+        </span>
 
-        <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-ink-soft">
+        <span className="mt-2.5 block text-[0.8125rem] leading-relaxed text-ink-soft">
           {ejercicio.descripcion}
-        </p>
+        </span>
 
         {ejercicio.musculosSecundarios.length > 0 && (
-          <p className="mt-2 text-xs text-ink-mute">
+          <span className="mt-2 block text-xs text-ink-mute">
             También trabaja: {ejercicio.musculosSecundarios.map(nombreMusculo).join(', ')}
-          </p>
+          </span>
         )}
-      </div>
-    </motion.article>
+      </span>
+    </motion.button>
   );
 }

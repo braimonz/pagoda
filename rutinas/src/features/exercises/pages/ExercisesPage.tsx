@@ -2,45 +2,56 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
 import { AppShell, Contenido } from '@/components/layout/AppShell';
+import { BarraInferior } from '@/components/layout/BarraInferior';
 import { TopBar } from '@/components/layout/TopBar';
 import { Button } from '@/components/ui/Button';
+import { Chip } from '@/components/ui/Chip';
+import { Toast } from '@/components/ui/Toast';
 import { grupoMuscularPorId } from '@/config/muscleGroups';
 import { pantalla } from '@/lib/motion';
-import type { MuscleGroupId } from '@/types/exercise';
+import { useSeleccion, useTotalEjercicios, useTotalGrupos } from '@/store/seleccion.store';
 
 import { EstadoRecurso } from '../components/EstadoRecurso';
 import { ExerciseList } from '../components/ExerciseList';
 import { MuscleGroupList } from '../components/MuscleGroupList';
-import { useExercisesByGroup } from '../hooks/useExercisesByGroup';
+import { useExercisesByGroups } from '../hooks/useExercisesByGroups';
 import { useMuscleGroups } from '../hooks/useMuscleGroups';
 
+type Vista = 'grupos' | 'ejercicios';
+
 /**
- * Catálogo de ejercicios.
+ * Selección de ejercicios, en dos pasos.
  *
- * Las dos vistas se turnan, no conviven: mientras no hay grupo elegido se
- * ven únicamente los grupos musculares, y al elegir uno se ven únicamente
- * sus ejercicios. `AnimatePresence` con `mode="wait"` garantiza que la
- * saliente termine antes de que entre la nueva, para que nunca se solapen.
+ * 1. **Grupos** — se eligen varios. La barra inferior cuenta grupos.
+ * 2. **Ejercicios** — se eligen varios de entre los grupos elegidos. La
+ *    barra cuenta ejercicios y bloquea *Continuar* hasta que haya al menos
+ *    uno.
  *
- * Es el único componente con estado; el resto son presentación y hooks.
+ * Las dos vistas se turnan, no conviven, y `AnimatePresence mode="wait"`
+ * garantiza que la saliente termine antes de que entre la nueva.
+ *
+ * La selección no vive aquí sino en el store: al volver atrás a cambiar de
+ * grupos, lo ya elegido sigue marcado.
  */
 export function ExercisesPage() {
-  const [grupoSeleccionado, setGrupoSeleccionado] = useState<MuscleGroupId | null>(null);
+  const [vista, setVista] = useState<Vista>('grupos');
+  const [confirmacion, setConfirmacion] = useState<string | null>(null);
+
+  const gruposSeleccionados = useSeleccion((estado) => estado.grupos);
+  const totalGrupos = useTotalGrupos();
+  const totalEjercicios = useTotalEjercicios();
 
   const grupos = useMuscleGroups();
-  const ejercicios = useExercisesByGroup(grupoSeleccionado);
-
-  const grupo = grupoSeleccionado === null ? null : grupoMuscularPorId(grupoSeleccionado);
+  const secciones = useExercisesByGroups(gruposSeleccionados);
 
   return (
     <AppShell>
       <TopBar
         izquierda={
-          grupo && (
+          vista === 'ejercicios' && (
             <Button
               variante="discreto"
-              tamano="md"
-              onClick={() => setGrupoSeleccionado(null)}
+              onClick={() => setVista('grupos')}
               className="-ml-3 px-3"
             >
               <span aria-hidden="true">←</span> Grupos
@@ -53,26 +64,19 @@ export function ExercisesPage() {
           anulaba también el escalonado de la rejilla en la primera carga,
           que es justo el momento que más se nota. */}
       <AnimatePresence mode="wait">
-        {grupo === null ? (
-          <motion.main
-            key="grupos"
-            variants={pantalla}
-            initial="entra"
-            animate="visible"
-            exit="sale"
-          >
+        {vista === 'grupos' ? (
+          <motion.main key="grupos" variants={pantalla} initial="entra" animate="visible" exit="sale">
             <Contenido>
               <div className="pt-10 pb-8">
                 <p className="font-accent text-[0.6875rem] font-extrabold tracking-[0.3em] text-accent uppercase">
-                  Catálogo
+                  Paso 1 de 2
                 </p>
                 <h1 className="mt-3 font-display text-5xl leading-[0.9] tracking-wide text-ink">
-                  Grupos
-                  <br />
-                  musculares
+                  ¿Qué vas
+                  <br />a trabajar?
                 </h1>
                 <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-soft">
-                  Elige un grupo para ver sus ejercicios.
+                  Elige uno o varios grupos musculares.
                 </p>
               </div>
 
@@ -82,73 +86,82 @@ export function ExercisesPage() {
                 onReintentar={grupos.reintentar}
                 esqueleto="rejilla"
               >
-                <MuscleGroupList grupos={grupos.datos} onSeleccionar={setGrupoSeleccionado} />
+                <MuscleGroupList grupos={grupos.datos} />
               </EstadoRecurso>
 
-              <div className="pb-segura" />
+              {/* Aire para que la barra fija no tape la última tarjeta. */}
+              <div className="h-40" />
             </Contenido>
           </motion.main>
         ) : (
           <motion.main
-            key={grupo.id}
+            key="ejercicios"
             variants={pantalla}
             initial="entra"
             animate="visible"
             exit="sale"
           >
             <Contenido>
-              <div className="relative pt-10 pb-8">
-                {/* Sello a la altura del título y sin recortar por el borde:
-                    un glifo cortado a la mitad se lee como un fallo de
-                    maquetación, no como una decisión. */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute top-8 right-0 font-kanji text-[5.5rem] leading-none text-accent/8"
-                >
-                  {grupo.kanji}
-                </span>
-
+              <div className="pt-10 pb-8">
                 <p className="font-accent text-[0.6875rem] font-extrabold tracking-[0.3em] text-accent uppercase">
-                  Ejercicios
+                  Paso 2 de 2
                 </p>
                 <h1 className="mt-3 font-display text-5xl leading-none tracking-wide text-ink">
-                  {grupo.nombre}
+                  Ejercicios
                 </h1>
-                {ejercicios.estado === 'listo' && (
-                  <p className="mt-3 text-sm text-ink-mute">
-                    <span className="font-accent text-lg font-extrabold text-ink">
-                      {ejercicios.datos.length}
-                    </span>{' '}
-                    {ejercicios.datos.length === 1 ? 'ejercicio' : 'ejercicios'}
-                  </p>
-                )}
+                <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+                  Toca los que quieras añadir a tu rutina.
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {gruposSeleccionados.map((id) => (
+                    <Chip key={id}>{grupoMuscularPorId(id).nombre}</Chip>
+                  ))}
+                </div>
               </div>
 
               <EstadoRecurso
-                estado={ejercicios.estado}
-                error={ejercicios.error}
-                onReintentar={ejercicios.reintentar}
+                estado={secciones.estado}
+                error={secciones.error}
+                onReintentar={secciones.reintentar}
                 esqueleto="lista"
               >
-                <ExerciseList ejercicios={ejercicios.datos} />
+                <ExerciseList secciones={secciones.datos} />
               </EstadoRecurso>
 
-              <div className="pt-8">
-                <Button
-                  variante="fantasma"
-                  tamano="lg"
-                  ancho
-                  onClick={() => setGrupoSeleccionado(null)}
-                >
-                  Ver otros grupos
-                </Button>
-              </div>
-
-              <div className="pb-segura" />
+              <div className="h-40" />
             </Contenido>
           </motion.main>
         )}
       </AnimatePresence>
+
+      {vista === 'grupos' ? (
+        <BarraInferior
+          key="barra-grupos"
+          cantidad={totalGrupos}
+          singular="grupo"
+          plural="grupos"
+          textoBoton="Ver ejercicios"
+          ayuda="Elige al menos un grupo muscular."
+          onContinuar={() => setVista('ejercicios')}
+        />
+      ) : (
+        <BarraInferior
+          key="barra-ejercicios"
+          cantidad={totalEjercicios}
+          singular="ejercicio"
+          plural="ejercicios"
+          textoBoton="Continuar"
+          ayuda="Elige al menos un ejercicio."
+          onContinuar={() =>
+            setConfirmacion(
+              `${totalEjercicios} ${totalEjercicios === 1 ? 'ejercicio listo' : 'ejercicios listos'} para tu rutina.`,
+            )
+          }
+        />
+      )}
+
+      <Toast mensaje={confirmacion} onCerrar={() => setConfirmacion(null)} />
     </AppShell>
   );
 }

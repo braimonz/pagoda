@@ -11,11 +11,16 @@ import type { Transition, Variants } from 'framer-motion';
    elegancia sino como una app lenta.
 ============================================================ */
 
+/* `NonNullable` y no `Transition['ease']` a secas: ese tipo admite
+   undefined, y con exactOptionalPropertyTypes no se puede pasar a un
+   `transition` en línea. */
+type Curva = NonNullable<Transition['ease']>;
+
 /** La curva del sitio: arranca rápido y aterriza suave. */
-export const SUAVE: Transition['ease'] = [0.16, 1, 0.3, 1];
+export const SUAVE: Curva = [0.16, 1, 0.3, 1];
 
 /** Un sobrepaso mínimo. Solo para confirmaciones, nunca para entradas. */
-export const REBOTE: Transition['ease'] = [0.34, 1.56, 0.64, 1];
+export const REBOTE: Curva = [0.34, 1.56, 0.64, 1];
 
 /** Entrada de pantalla: sube 16 px mientras aparece. */
 export const pantalla: Variants = {

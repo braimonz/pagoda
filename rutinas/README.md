@@ -34,8 +34,25 @@ app.use('/rutinas', express.static(path.join(RAIZ, 'rutinas/dist')));
 
 ## Estado actual
 
-Implementado: **catálogo de ejercicios completo** — carga del JSON, navegación
-grupo → ejercicios e interfaz con Tailwind y Framer Motion.
+Implementado: **selección de ejercicios en dos pasos** — carga del JSON,
+elección múltiple de grupos y de ejercicios, barra inferior con el recuento, e
+interfaz con Tailwind y Framer Motion.
+
+```
+Paso 1 · Grupos          Paso 2 · Ejercicios
+┌───────────────┐        ┌───────────────────┐
+│ selección     │  Ver   │ los grupos        │
+│ múltiple de   │ ejerc. │ elegidos, en      │
+│ grupos        │ ─────► │ secciones         │
+├───────────────┤        ├───────────────────┤
+│ 3 GRUPOS  [→] │        │ 6 EJERC. [Contin.]│  ← barra fija
+└───────────────┘        └───────────────────┘
+    bloqueada con 0          bloqueada con 0
+```
+
+Soltar un grupo suelta también sus ejercicios: una barra que dijera «6
+ejercicios» con solo 3 a la vista daría un número que el socio no puede
+comprobar ni corregir.
 
 ```
 src/
@@ -53,15 +70,16 @@ src/
 │   ├── motion.ts                      vocabulario de animación compartido
 │   └── errors.ts                      mensaje de usuario vs. detalle técnico
 ├── services/exercises.service.ts      única puerta a los datos
+├── store/seleccion.store.ts           grupos y ejercicios elegidos (zustand)
 ├── hooks/useAsync.ts                  cargando / listo / error + reintentar
 ├── components/
-│   ├── ui/                            Button · Chip · Skeleton
-│   ├── layout/                        AppShell · Contenido · TopBar
+│   ├── ui/                            Button · Chip · Skeleton · Contador · Toast
+│   ├── layout/                        AppShell · TopBar · BarraInferior
 │   └── brand/Grain.tsx                textura del sitio
 └── features/exercises/
-    ├── hooks/                         useMuscleGroups · useExercisesByGroup
+    ├── hooks/                         useMuscleGroups · useExercisesByGroups
     ├── components/                    MuscleGroupCard · ExerciseCard · EstadoRecurso
-    └── pages/ExercisesPage.tsx        único componente con estado
+    └── pages/ExercisesPage.tsx        orquesta las dos vistas
 ```
 
 ### Sistema visual
@@ -118,5 +136,7 @@ Tres decisiones que conviene conocer antes de tocar esto:
   tarjeta puede volver al formato vertical 3:4 del documento de diseño.
 - `seriesSugeridas`, `repsSugeridas`, `descansoSugeridoSeg` y `ejecucion` en el
   JSON: el esquema ya los admite como opcionales, pero el catálogo aún no los trae.
-- Router, constructor de rutina y persistencia — las pantallas ② a ⑦ de
-  `DISENO-UX.md` todavía no existen.
+- **Qué hace *Continuar***: hoy confirma con un aviso y deja la selección en el
+  store. El siguiente paso es repartir los ejercicios por días.
+- Router, resumen y persistencia — las pantallas ③, ⑥ y ⑦ de `DISENO-UX.md`
+  todavía no existen.
