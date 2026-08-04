@@ -247,8 +247,10 @@ los negros la planitud digital.
 
 **El sello kanji.** 力 (fuerza) en `rgba(225,6,0,0.08)`, enorme, detrás del
 contenido. Uno por pantalla como máximo, y nunca detrás de texto de lectura.
-Kanji por grupo muscular: 胸 pecho · 背 espalda · 脚 piernas · 肩 hombros ·
-腕 brazos · 芯 core · 心 cardio.
+Kanji por grupo muscular: 胸 pecho · 背 espalda · 肩 hombros · 屈 bíceps ·
+伸 tríceps · 脚 piernas · 臀 glúteos · 腹 abdomen. Los de brazo no son
+decorativos: 屈 es *flexionar* y 伸 *extender*, que es exactamente lo que
+hace cada uno de los dos músculos.
 
 ---
 
@@ -622,17 +624,17 @@ flujo y donde la app se ve mejor.
 │   │  [foto]   │ │  [foto]   │       │  Rejilla 2 col · gap 12px
 │   │        胸 │ │        背 │       │  ratio 3:4 · radio 10px
 │   │  PECHO    │ │  ESPALDA  │       │  Bebas 22px abajo-izq
-│   │  12 ejerc.│ │  14 ejerc.│       │  Caption
+│   │  15 ejerc.│ │  15 ejerc.│       │  Caption
 │   └───────────┘ └───────────┘       │
 │   ┌───────────┐ ┌───────────┐       │
-│   │  PIERNAS  │ │  HOMBROS  │       │
+│   │  HOMBROS  │ │  BÍCEPS   │       │
 │   └───────────┘ └───────────┘       │
 │   ┌───────────┐ ┌───────────┐       │
-│   │  BRAZOS   │ │   CORE    │       │
+│   │  TRÍCEPS  │ │  PIERNAS  │       │
 │   └───────────┘ └───────────┘       │
-│   ┌───────────┐                     │
-│   │  CARDIO   │                     │
-│   └───────────┘                     │
+│   ┌───────────┐ ┌───────────┐       │
+│   │  GLÚTEOS  │ │  ABDOMEN  │       │
+│   └───────────┘ └───────────┘       │
 │                                     │  120px
 ├─────────────────────────────────────┤
 │   LUNES · PECHO + TRÍCEPS           │  Resumen vivo

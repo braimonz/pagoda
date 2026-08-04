@@ -487,23 +487,36 @@ de datos sin tocar la UI, y probar las reglas de negocio sin montar React.
 ```ts
 // types/exercise.ts — lo que trae el JSON
 type MuscleGroupId =
-  | 'pecho' | 'espalda' | 'piernas' | 'hombros'
-  | 'brazos' | 'core'   | 'cardio';
+  | 'pecho'   | 'espalda' | 'hombros' | 'biceps'
+  | 'triceps' | 'piernas' | 'gluteos' | 'abdomen';
+
+/* Músculos que solo aparecen como secundarios: no son un grupo elegible
+   en el paso ④, pero describir el ejercicio sin ellos sería impreciso. */
+type SecondaryMuscleId = 'antebrazo' | 'trapecio' | 'lumbar';
+
+type EquipmentId =
+  | 'barra' | 'mancuerna' | 'maquina' | 'polea'
+  | 'peso-corporal' | 'banda' | 'disco' | 'accesorio';
 
 interface Exercise {
   id: string;                  // 'press-banca-barra'
   nombre: string;
-  grupo: MuscleGroupId;
-  musculosSecundarios: MuscleGroupId[];
-  equipo: 'barra' | 'mancuerna' | 'maquina' | 'polea' | 'peso-corporal';
+  grupoMuscular: MuscleGroupId;
+  musculosSecundarios: (MuscleGroupId | SecondaryMuscleId)[];
+  equipo: EquipmentId;
   nivel: 'principiante' | 'intermedio' | 'avanzado';
-  seriesSugeridas: number;
-  repsSugeridas: string;       // '8-12'
-  descansoSugeridoSeg: number;
   descripcion: string;
-  ejecucion: string[];         // pasos
-  imagen?: string;
-  video?: string;
+  imagen: string;              // '' mientras no haya fotografía
+  video: string;               // '' mientras no haya vídeo
+
+  /* PENDIENTES — no están todavía en ejercicios.json.
+     Los necesitan la fila del paso ⑤ ("4 × 8-12"), los contadores del
+     sheet de ajuste y el temporizador de descanso. Mientras falten, la UI
+     debe usar los valores por defecto de config/. */
+  seriesSugeridas?: number;
+  repsSugeridas?: string;      // '8-12'
+  descansoSugeridoSeg?: number;
+  ejecucion?: string[];        // pasos numerados de la ficha
 }
 
 // types/routine.ts — lo que construye el socio
