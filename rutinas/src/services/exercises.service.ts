@@ -24,6 +24,8 @@ interface Catalogo {
   readonly ejercicios: readonly Exercise[];
   /** Índice construido una sola vez: filtrar por grupo es O(1), no O(n). */
   readonly porGrupo: ReadonlyMap<MuscleGroupId, readonly Exercise[]>;
+  /** Índice por id: la rutina guarda ids y necesita resolverlos al pintar. */
+  readonly porId: ReadonlyMap<string, Exercise>;
   /** Solo los grupos que tienen al menos un ejercicio, en orden de catálogo. */
   readonly grupos: readonly MuscleGroupSummary[];
 }
@@ -132,7 +134,9 @@ function indexar(ejercicios: readonly Exercise[]): Catalogo {
     return total === 0 ? [] : [{ ...grupo, total }];
   });
 
-  return { ejercicios, porGrupo, grupos };
+  const porId = new Map(ejercicios.map((ejercicio) => [ejercicio.id, ejercicio]));
+
+  return { ejercicios, porGrupo, porId, grupos };
 }
 
 function obtenerCatalogo(): Promise<Catalogo> {
@@ -194,8 +198,16 @@ export async function getExercises(): Promise<readonly Exercise[]> {
 
 /** Un ejercicio por id, o null si no existe. */
 export async function getExerciseById(id: string): Promise<Exercise | null> {
-  const { ejercicios } = await obtenerCatalogo();
-  return ejercicios.find((ejercicio) => ejercicio.id === id) ?? null;
+  const { porId } = await obtenerCatalogo();
+  return porId.get(id) ?? null;
+}
+
+/**
+ * Índice completo por id. Lo usa la pantalla semanal: la rutina guarda
+ * ids, no copias del ejercicio, así que hay que resolverlos al pintar.
+ */
+export async function getExercisesIndex(): Promise<ReadonlyMap<string, Exercise>> {
+  return (await obtenerCatalogo()).porId;
 }
 
 /** Olvida lo descargado. La usan el botón de reintentar y las pruebas. */

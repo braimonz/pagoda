@@ -34,25 +34,53 @@ app.use('/rutinas', express.static(path.join(RAIZ, 'rutinas/dist')));
 
 ## Estado actual
 
-Implementado: **selección de ejercicios en dos pasos** — carga del JSON,
-elección múltiple de grupos y de ejercicios, barra inferior con el recuento, e
-interfaz con Tailwind y Framer Motion.
+Implementado: **el constructor de rutinas en tres pasos** — carga del JSON,
+elección múltiple de grupos y de ejercicios, y organización de la semana con
+arrastrar y soltar.
 
 ```
-Paso 1 · Grupos          Paso 2 · Ejercicios
-┌───────────────┐        ┌───────────────────┐
-│ selección     │  Ver   │ los grupos        │
-│ múltiple de   │ ejerc. │ elegidos, en      │
-│ grupos        │ ─────► │ secciones         │
-├───────────────┤        ├───────────────────┤
-│ 3 GRUPOS  [→] │        │ 6 EJERC. [Contin.]│  ← barra fija
-└───────────────┘        └───────────────────┘
-    bloqueada con 0          bloqueada con 0
+Paso 1 · Grupos        Paso 2 · Ejercicios      Paso 3 · Semana
+┌───────────────┐      ┌───────────────────┐    ┌──────────────────┐
+│ selección     │ Ver  │ los grupos        │Org.│ los 7 días       │
+│ múltiple      │ejerc.│ elegidos, en      │───►│ añadir · quitar  │
+│ de grupos     │ ───► │ secciones         │    │ arrastrar        │
+├───────────────┤      ├───────────────────┤    ├──────────────────┤
+│ 3 GRUPOS  [→] │      │ 6 EJERC.  [→]     │    │ 6 EJERC. · 3 DÍAS│
+└───────────────┘      └───────────────────┘    └──────────────────┘
+  bloqueada con 0        bloqueada con 0          se actualiza solo
 ```
 
-Soltar un grupo suelta también sus ejercicios: una barra que dijera «6
-ejercicios» con solo 3 a la vista daría un número que el socio no puede
-comprobar ni corregir.
+### Reglas del constructor
+
+- **Soltar un grupo suelta también sus ejercicios.** Una barra que dijera «6
+  ejercicios» con solo 3 a la vista daría un número que el socio no puede
+  comprobar ni corregir.
+- **Al entrar a la semana se reparte por grupos**: el primer grupo al lunes, el
+  segundo al martes, y así. Siete días vacíos obligarían a arrastrar quince
+  tarjetas antes de ver nada.
+- **Volver atrás no deshace la semana.** `sincronizar` conserva lo ya colocado y
+  reparte solo lo nuevo; lo que deje de estar seleccionado sí desaparece.
+- **Añadir desde la semana también marca el ejercicio como seleccionado**, para
+  que la semana y la selección nunca digan cosas distintas.
+- **Se permite repetir**: cada instancia lleva su propio `uid`, así que el mismo
+  press de banca puede estar el lunes y el viernes y quitar uno no quita el otro.
+
+### Arrastrar y soltar
+
+`@dnd-kit` con tres sensores: puntero, táctil y **teclado** —enfocar el asa,
+espacio, flechas, espacio—, de modo que reordenar no depende de poder arrastrar.
+Los anuncios para lectores de pantalla van traducidos al español.
+
+El arrastre sale de un asa y no de toda la tarjeta: si la tarjeta entera
+arrastrase, en móvil no se podría hacer scroll sin mover ejercicios sin querer.
+El asa lleva `touch-action: none`, sin la cual el navegador se queda el gesto y
+el arrastre no llega a empezar.
+
+Un día entero es zona de destino **solo cuando está vacío**. Con tarjetas dentro
+se desactiva a propósito: el contenedor le gana la detección de colisión a sus
+propias tarjetas —es más grande y sus esquinas quedan más cerca— y todo
+aterrizaba al final del día, con lo que reordenar dentro de un mismo día no
+hacía nada.
 
 ```
 src/
@@ -70,16 +98,18 @@ src/
 │   ├── motion.ts                      vocabulario de animación compartido
 │   └── errors.ts                      mensaje de usuario vs. detalle técnico
 ├── services/exercises.service.ts      única puerta a los datos
-├── store/seleccion.store.ts           grupos y ejercicios elegidos (zustand)
+├── store/
+│   ├── seleccion.store.ts             grupos y ejercicios elegidos (zustand)
+│   └── rutina.store.ts                la semana: qué ejercicio en qué día
 ├── hooks/useAsync.ts                  cargando / listo / error + reintentar
 ├── components/
-│   ├── ui/                            Button · Chip · Skeleton · Contador · Toast
+│   ├── ui/                            Button · Chip · Skeleton · Contador · Sheet · Toast
 │   ├── layout/                        AppShell · TopBar · BarraInferior
 │   └── brand/Grain.tsx                textura del sitio
-└── features/exercises/
-    ├── hooks/                         useMuscleGroups · useExercisesByGroups
-    ├── components/                    MuscleGroupCard · ExerciseCard · EstadoRecurso
-    └── pages/ExercisesPage.tsx        orquesta las dos vistas
+├── features/
+│   ├── exercises/                     PasoGrupos · PasoEjercicios · tarjetas
+│   └── routine/                       PasoSemana · DiaSeccion · TarjetaAsignada
+└── app/ConstructorRutina.tsx          orquesta los tres pasos
 ```
 
 ### Sistema visual
@@ -109,12 +139,14 @@ opacidad pero ningún desplazamiento.
 public/data/ejercicios.json
         │  fetch  (una sola vez: la promesa está memoizada)
         ▼
-exercises.service.ts   valida con zod → indexa por grupo (Map) → cuenta por grupo
-        │  getMuscleGroups() · getExercisesByGroup()
+exercises.service.ts   valida con zod → indexa por grupo y por id → cuenta
+        │  getMuscleGroups() · getExercisesByGroups() · getExercisesIndex()
         ▼
-useMuscleGroups · useExercisesByGroup     sobre useAsync
+useMuscleGroups · useExercisesByGroups · useExerciseIndex     sobre useAsync
         ▼
-ExercisesPage   guarda el grupo elegido y alterna las dos vistas
+seleccion.store  →  rutina.store        lo elegido y dónde queda colocado
+        ▼
+ConstructorRutina   decide qué paso se ve
 ```
 
 Tres decisiones que conviene conocer antes de tocar esto:
@@ -136,7 +168,9 @@ Tres decisiones que conviene conocer antes de tocar esto:
   tarjeta puede volver al formato vertical 3:4 del documento de diseño.
 - `seriesSugeridas`, `repsSugeridas`, `descansoSugeridoSeg` y `ejecucion` en el
   JSON: el esquema ya los admite como opcionales, pero el catálogo aún no los trae.
-- **Qué hace *Continuar***: hoy confirma con un aviso y deja la selección en el
-  store. El siguiente paso es repartir los ejercicios por días.
-- Router, resumen y persistencia — las pantallas ③, ⑥ y ⑦ de `DISENO-UX.md`
-  todavía no existen.
+- **Persistencia**: la semana vive en memoria, así que recargar la borra. Es el
+  siguiente paso obvio —`persist` de zustand con la clave `pagoda:rutina:local`
+  que define `ARQUITECTURA.md` §7— y por eso la barra todavía no dice «guardado».
+- Series, repeticiones y descanso por ejercicio: el esquema ya los admite, pero
+  ni el JSON los trae ni la tarjeta de la semana los deja editar.
+- Router, resumen y compartir — las pantallas ⑥ y ⑦ de `DISENO-UX.md`.

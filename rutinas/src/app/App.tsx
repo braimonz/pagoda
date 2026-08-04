@@ -1,6 +1,6 @@
 import { MotionConfig } from 'framer-motion';
 
-import { ExercisesPage } from '@/features/exercises/pages/ExercisesPage';
+import { ConstructorRutina } from './ConstructorRutina';
 
 /**
  * Raíz de la aplicación.
@@ -11,12 +11,12 @@ import { ExercisesPage } from '@/features/exercises/pages/ExercisesPage';
  * detalle opcional — este tipo de animación puede provocar mareo.
  *
  * Cuando entren el router y el AuthProvider (ARQUITECTURA.md §8) se
- * enchufan aquí, sin tocar el feature.
+ * enchufan aquí, sin tocar los features.
  */
 export function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <ExercisesPage />
+      <ConstructorRutina />
     </MotionConfig>
   );
 }

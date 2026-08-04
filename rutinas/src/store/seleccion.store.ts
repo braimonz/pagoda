@@ -16,6 +16,8 @@ interface EstadoSeleccion {
 
   alternarGrupo: (grupo: MuscleGroupId) => void;
   alternarEjercicio: (ejercicio: Exercise) => void;
+  /** Lo marca como elegido si no lo estaba. Idempotente, a diferencia de alternar. */
+  asegurarSeleccionado: (ejercicio: Exercise) => void;
   reiniciar: () => void;
 }
 
@@ -55,6 +57,22 @@ export const useSeleccion = create<EstadoSeleccion>()((set) => ({
         ? estado.ejercicios.filter((e) => e.id !== ejercicio.id)
         : [...estado.ejercicios, { id: ejercicio.id, grupo: ejercicio.grupoMuscular }],
     })),
+
+  /* La usa el panel de "Añadir ejercicio" de la pantalla semanal. Sin
+     esto, lo añadido allí no estaría en la selección y `sincronizar` lo
+     borraría en cuanto el socio volviera atrás y regresara: habría metido
+     un ejercicio a mano y se lo habría encontrado desaparecido. */
+  asegurarSeleccionado: (ejercicio) =>
+    set((estado) =>
+      estado.ejercicios.some((e) => e.id === ejercicio.id)
+        ? {}
+        : {
+            ejercicios: [
+              ...estado.ejercicios,
+              { id: ejercicio.id, grupo: ejercicio.grupoMuscular },
+            ],
+          },
+    ),
 
   reiniciar: () => set({ grupos: [], ejercicios: [] }),
 }));
