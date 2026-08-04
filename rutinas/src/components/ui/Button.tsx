@@ -27,6 +27,25 @@ const TAMANOS: Record<Tamano, string> = {
   lg: 'h-14 px-7 text-base',
 };
 
+/** Las clases de un botón, compartidas por el `<button>` y el `<a>`. */
+export function clasesBoton(
+  variante: Variante = 'primario',
+  tamano: Tamano = 'md',
+  ancho = false,
+  className?: string,
+): string {
+  return cn(
+    'inline-flex items-center justify-center gap-2 rounded-btn',
+    'font-accent font-extrabold uppercase tracking-[0.14em]',
+    'transition-colors duration-200 select-none',
+    'disabled:pointer-events-none disabled:opacity-40',
+    VARIANTES[variante],
+    TAMANOS[tamano],
+    ancho && 'w-full',
+    className,
+  );
+}
+
 /**
  * Botón de la app.
  *
@@ -46,16 +65,42 @@ export function Button({
       type="button"
       whileTap={PULSACION}
       transition={{ duration: 0.12 }}
-      className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-btn',
-        'font-accent font-extrabold uppercase tracking-[0.14em]',
-        'transition-colors duration-200 select-none',
-        'disabled:pointer-events-none disabled:opacity-40',
-        VARIANTES[variante],
-        TAMANOS[tamano],
-        ancho && 'w-full',
-        className,
-      )}
+      className={clasesBoton(variante, tamano, ancho, className)}
+      {...props}
+    />
+  );
+}
+
+interface BotonEnlaceProps extends HTMLMotionProps<'a'> {
+  readonly href: string;
+  readonly variante?: Variante;
+  readonly tamano?: Tamano;
+  readonly ancho?: boolean;
+}
+
+/**
+ * Un enlace con aspecto de botón.
+ *
+ * Se usa —en vez de un `<button>` con `window.open`— para abrir apps
+ * externas como WhatsApp. Un `<a>` real no lo bloquea el navegador, se
+ * puede mantener pulsado para copiar la dirección y funciona dentro de los
+ * navegadores integrados de Instagram o Facebook, donde `window.open`
+ * muchas veces no hace nada.
+ */
+export function BotonEnlace({
+  variante = 'primario',
+  tamano = 'md',
+  ancho = false,
+  className,
+  ...props
+}: BotonEnlaceProps) {
+  return (
+    <motion.a
+      target="_blank"
+      rel="noopener noreferrer"
+      whileTap={PULSACION}
+      transition={{ duration: 0.12 }}
+      className={clasesBoton(variante, tamano, ancho, className)}
       {...props}
     />
   );

@@ -99,6 +99,46 @@ export function crearEnlaceRutina(semana: Semana, base?: string): string {
 }
 
 /* ------------------------------------------------------------
+   WHATSAPP
+------------------------------------------------------------ */
+
+/** Encabezado del mensaje. Es lo que el socio verá en su lista de chats. */
+export const TITULO_MENSAJE = 'Mi rutina semanal';
+
+/**
+ * El texto que se manda por WhatsApp: título, un resumen de una línea y
+ * el enlace.
+ *
+ * El enlace va en su propia línea y al final para que WhatsApp lo detecte
+ * y lo enlace entero. Pegado a otro texto, el punto o el paréntesis de
+ * cierre acaban dentro de la URL y el enlace deja de funcionar.
+ */
+export function crearMensajeWhatsApp(semana: Semana, enlace?: string): string {
+  const url = enlace ?? crearEnlaceRutina(semana);
+
+  const ejercicios = DIA_IDS.reduce((total, dia) => total + semana[dia].length, 0);
+  const dias = DIA_IDS.filter((dia) => semana[dia].length > 0).length;
+
+  const resumen =
+    `${ejercicios} ${ejercicios === 1 ? 'ejercicio' : 'ejercicios'} ` +
+    `en ${dias} ${dias === 1 ? 'día' : 'días'}`;
+
+  return `${TITULO_MENSAJE} — Pagoda Fitness Center\n${resumen}\n\n${url}`;
+}
+
+/**
+ * La dirección `wa.me` que abre WhatsApp con el mensaje ya escrito.
+ *
+ * Sin número de destino: `wa.me/?text=` abre el selector de contactos, así
+ * que sirve tanto para mandársela a alguien como para guardársela uno
+ * mismo en su propio chat. Y no necesita servidor ni la API de WhatsApp
+ * Business, igual que los avisos del panel de socios.
+ */
+export function crearEnlaceWhatsApp(mensaje: string): string {
+  return `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
+}
+
+/* ------------------------------------------------------------
    ENLACE → JSON → RUTINA
 ------------------------------------------------------------ */
 

@@ -1,10 +1,16 @@
 import { useState } from 'react';
 
-import { Button } from '@/components/ui/Button';
+import { BotonEnlace, Button } from '@/components/ui/Button';
+import { IconoWhatsApp } from '@/components/ui/IconoWhatsApp';
 import { Sheet } from '@/components/ui/Sheet';
 import { useRutina } from '@/store/rutina.store';
 
-import { crearEnlaceRutina, rutinaAJson } from '../utils/compartir';
+import {
+  crearEnlaceRutina,
+  crearEnlaceWhatsApp,
+  crearMensajeWhatsApp,
+  rutinaAJson,
+} from '../utils/compartir';
 
 interface CompartirSheetProps {
   readonly abierto: boolean;
@@ -38,7 +44,7 @@ export function CompartirSheet({ abierto, onCerrar }: CompartirSheetProps) {
     }
   }
 
-  const mensajeWhatsApp = `Mira mi rutina de Pagoda:\n${enlace}`;
+  const mensaje = abierto ? crearMensajeWhatsApp(semana, enlace) : '';
 
   return (
     <Sheet abierto={abierto} titulo="Compartir rutina" onCerrar={onCerrar}>
@@ -68,25 +74,24 @@ export function CompartirSheet({ abierto, onCerrar }: CompartirSheetProps) {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Button tamano="lg" ancho onClick={copiar}>
+          <BotonEnlace href={crearEnlaceWhatsApp(mensaje)} tamano="lg" ancho>
+            <IconoWhatsApp />
+            Guardar en WhatsApp
+          </BotonEnlace>
+
+          <Button variante="fantasma" tamano="lg" ancho onClick={copiar}>
             {copiado ? '✓ Copiado' : 'Copiar enlace'}
           </Button>
-
-          <Button
-            variante="fantasma"
-            tamano="lg"
-            ancho
-            onClick={() =>
-              window.open(
-                `https://wa.me/?text=${encodeURIComponent(mensajeWhatsApp)}`,
-                '_blank',
-                'noopener,noreferrer',
-              )
-            }
-          >
-            Enviar por WhatsApp
-          </Button>
         </div>
+
+        <details className="rounded-tile border border-line bg-surface p-4">
+          <summary className="cursor-pointer text-sm font-semibold text-ink">
+            Ver el mensaje
+          </summary>
+          <p className="mt-3 text-xs leading-relaxed whitespace-pre-wrap text-ink-mute">
+            {mensaje}
+          </p>
+        </details>
 
         <details className="rounded-tile border border-line bg-surface p-4">
           <summary className="cursor-pointer text-sm font-semibold text-ink">

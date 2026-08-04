@@ -95,6 +95,25 @@ Cuatro decisiones:
 Los ids que ya no existen en el catálogo se descartan y se dice cuántos; un
 enlace corrupto o de una versión más nueva avisa sin romper la app.
 
+**Guardar en WhatsApp** abre `https://wa.me/?text=…` con el mensaje ya escrito:
+
+```
+Mi rutina semanal — Pagoda Fitness Center
+5 ejercicios en 2 días
+
+https://pagoda.mx/rutinas/?data=eyJ2Ijox…
+```
+
+Sin número de destino, así que el selector de contactos permite tanto mandársela
+a alguien como guardársela uno mismo en su propio chat. Como los avisos del panel
+de socios, no necesita servidor ni la API de WhatsApp Business.
+
+Es un `<a>` real y no un `<button>` con `window.open`: así no lo bloquea el
+navegador, se puede mantener pulsado para copiar la dirección y funciona dentro
+de los navegadores integrados de Instagram o Facebook, donde `window.open` muchas
+veces no hace nada. El enlace va en su propia línea y al final para que WhatsApp
+lo detecte entero — pegado a otro texto, el punto final acaba dentro de la URL.
+
 ### Arrastrar y soltar
 
 `@dnd-kit` con tres sensores: puntero, táctil y **teclado** —enfocar el asa,
