@@ -150,10 +150,14 @@ src/
 ├── services/exercises.service.ts      única puerta a los datos
 ├── store/
 │   ├── seleccion.store.ts             grupos y ejercicios elegidos (zustand)
-│   └── rutina.store.ts                la semana: qué ejercicio en qué día
-├── hooks/useAsync.ts                  cargando / listo / error + reintentar
+│   ├── rutina.store.ts                la semana: qué ejercicio en qué día
+│   └── ui.store.ts                    cola de avisos
+├── hooks/
+│   ├── useAsync.ts                    cargando / listo / error + reintentar
+│   └── useTrampaDeFoco.ts             encierra el foco en panel y diálogo
 ├── components/
-│   ├── ui/                            Button · Chip · Skeleton · Contador · Sheet · Toast
+│   ├── ui/                            Button · Chip · Skeleton · Contador · Sheet
+│   │                                  Avisos · DialogoConfirmacion
 │   ├── layout/                        AppShell · TopBar · BarraInferior
 │   └── brand/Grain.tsx                textura del sitio
 ├── features/
