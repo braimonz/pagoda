@@ -27,7 +27,11 @@ export function BarraSemana({ onCompartir }: BarraSemanaProps) {
       transition={{ duration: 0.32, ease: SUAVE, delay: 0.1 }}
       className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-elevated/85 backdrop-blur-xl"
     >
-      <div className="pb-segura mx-auto flex max-w-screen-md items-center gap-6 px-5 pt-4">
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="pb-segura mx-auto flex max-w-screen-md items-center gap-6 px-5 pt-4"
+      >
         <p className="flex items-baseline gap-1.5 font-accent font-extrabold text-ink">
           <Contador valor={total} className="text-2xl leading-none" />
           <span className="text-xs tracking-[0.16em] text-ink-soft uppercase">

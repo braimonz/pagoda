@@ -163,6 +163,45 @@ src/
 └── app/ConstructorRutina.tsx          orquesta los tres pasos
 ```
 
+### Experiencia
+
+| Área | Qué hay |
+|---|---|
+| **Transiciones** | Direccionales: avanzar entra desde abajo, retroceder desde arriba. El sentido dice si vas o vuelves sin leer nada |
+| **Microinteracciones** | Pulsación que cede un 3 %, check con rebote al seleccionar, cifras que ruedan dentro de una máscara, panel que se cierra arrastrando |
+| **Esqueletos** | Con la forma de lo que va a llegar: rejilla, lista y semana. Nunca un spinner centrado |
+| **Estados vacíos** | Los cuatro con salida: semana vacía con botón, día de descanso, catálogo sin grupos, filtro sin resultados |
+| **Avisos** | Cola de hasta 3, con tono, acción y cierre manual o automático. `aria-live="polite"` |
+| **Confirmaciones** | Diálogo solo para lo que destruye trabajo; para el resto, **Deshacer** |
+
+**Cuándo se pregunta y cuándo se deshace.** Quitar un ejercicio actúa y ofrece
+*Deshacer*, que lo devuelve a su día y posición exactos. Quitar un **grupo** que
+tiene ejercicios ya colocados sí abre un diálogo: no es una tarjeta, es trabajo de
+varios minutos que desaparece de una pantalla que ni siquiera está a la vista.
+Preguntar por todo entrena a la gente a dar a «sí» sin leer, que es peor que no
+preguntar.
+
+### Accesibilidad
+
+- Enlace **Saltar al contenido** como primer elemento tabulable.
+- Al cambiar de paso el foco va al `<h1>`, y se hace al **terminar** la animación:
+  con `mode="wait"` el paso entrante aún no está en el DOM cuando corre el efecto,
+  así que el foco se quedaba en el cuerpo del documento.
+- Panel y diálogo encierran el foco, se cierran con Escape y lo devuelven al botón
+  que los abrió.
+- `aria-live` en los recuentos de las barras y en la pila de avisos.
+- Arrastrar funciona con teclado —espacio, flechas, espacio— y anuncia en español.
+- Toda selección se marca con forma además de color.
+
+### Rendimiento
+
+| Medida | Efecto |
+|---|---|
+| El paso 3 en un `chunk` aparte | El bundle inicial baja de 137 a 122 KB gzip; `@dnd-kit` (19 KB) solo se descarga al llegar a la semana |
+| `memo` en las tres tarjetas | Cada una lee del store su propio booleano, así que tocar una no repinta las otras 44 |
+| `content-visibility: auto` | El navegador se salta estilo y trazado de las fichas fuera de pantalla |
+| Promesa del catálogo memoizada | Una sola descarga por sesión |
+
 ### Sistema visual
 
 Paleta oscura sobre tres superficies y un solo color de acción:

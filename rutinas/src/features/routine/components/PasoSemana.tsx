@@ -15,9 +15,11 @@ import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { useMemo, useState } from 'react';
 
 import { Contenido } from '@/components/layout/AppShell';
+import { Button } from '@/components/ui/Button';
 import { DIA_IDS, DIAS, esDiaId, type Dia, type DiaId } from '@/config/dias';
 import type { SeccionGrupo } from '@/services/exercises.service';
-import { useRutina, useTotalAsignados, type EjercicioAsignado } from '@/store/rutina.store';
+import { localizar, useRutina, useTotalAsignados, type EjercicioAsignado } from '@/store/rutina.store';
+import { useUi } from '@/store/ui.store';
 import { useSeleccion } from '@/store/seleccion.store';
 import type { Exercise } from '@/types/exercise';
 
@@ -56,7 +58,9 @@ export function PasoSemana({ secciones }: PasoSemanaProps) {
   const quitar = useRutina((estado) => estado.quitar);
   const mover = useRutina((estado) => estado.mover);
   const agregar = useRutina((estado) => estado.agregar);
+  const insertar = useRutina((estado) => estado.insertar);
   const asegurarSeleccionado = useSeleccion((estado) => estado.asegurarSeleccionado);
+  const mostrarAviso = useUi((estado) => estado.mostrarAviso);
 
   const total = useTotalAsignados();
   const indice = useExerciseIndex();
@@ -95,10 +99,12 @@ export function PasoSemana({ secciones }: PasoSemanaProps) {
 
     /* Soltar sobre el contenedor de un día lo manda al final; soltar sobre
        una tarjeta lo coloca en el lugar de esa tarjeta. */
+    const origen = porUid.get(uid);
+
     if (esDiaId(destinoId)) {
-      const mismoDia = porUid.get(uid)?.dia === destinoId;
-      if (mismoDia) return;
+      if (origen?.dia === destinoId) return;
       mover(uid, destinoId, semana[destinoId].length);
+      avisarCambioDeDia(origen?.dia, destinoId);
       return;
     }
 
@@ -106,6 +112,38 @@ export function PasoSemana({ secciones }: PasoSemanaProps) {
     if (!destino || destinoId === uid) return;
 
     mover(uid, destino.dia, semana[destino.dia].findIndex((e) => e.uid === destinoId));
+    avisarCambioDeDia(origen?.dia, destino.dia);
+  }
+
+  /* Solo se avisa al cambiar de día. Reordenar dentro del mismo día ya se
+     ve en la propia lista; un aviso por cada arrastre sería ruido. */
+  function avisarCambioDeDia(desde: DiaId | undefined, hasta: DiaId) {
+    if (desde === undefined || desde === hasta) return;
+    const nombre = DIAS.find((d) => d.id === hasta)?.nombre ?? '';
+    mostrarAviso({ texto: `Movido al ${nombre.toLowerCase()}.`, tono: 'exito', duracionMs: 2200 });
+  }
+
+  /**
+   * Quitar es destructivo, así que se ofrece deshacer en lugar de
+   * preguntar antes: preguntar por cada tarjeta convertiría organizar la
+   * semana en un interrogatorio. Se guarda el día y la posición exactos
+   * para devolverla a su sitio y no al final de la lista.
+   */
+  function alQuitar(uid: string) {
+    const sitio = localizar(semana, uid);
+    const asignado = sitio ? semana[sitio.dia].find((e) => e.uid === uid) : undefined;
+    if (!sitio || !asignado) return;
+
+    const nombre = indice.datos.get(asignado.ejercicioId)?.nombre ?? 'Ejercicio';
+    quitar(uid);
+
+    mostrarAviso({
+      texto: `${nombre} fuera de la rutina.`,
+      accion: {
+        etiqueta: 'Deshacer',
+        alPulsar: () => insertar(sitio.dia, sitio.indice, asignado),
+      },
+    });
   }
 
   function alElegirEjercicio(ejercicio: Exercise) {
@@ -117,6 +155,10 @@ export function PasoSemana({ secciones }: PasoSemanaProps) {
        la semana sin que el socio entendiera por qué. */
     asegurarSeleccionado(ejercicio);
     agregar(diaDestino.id, { id: ejercicio.id, grupo: ejercicio.grupoMuscular });
+    mostrarAviso({
+      texto: `${ejercicio.nombre} añadido al ${diaDestino.nombre.toLowerCase()}.`,
+      tono: 'exito',
+    });
     setDiaDestino(null);
   }
 
@@ -126,7 +168,9 @@ export function PasoSemana({ secciones }: PasoSemanaProps) {
         <p className="font-accent text-[0.6875rem] font-extrabold tracking-[0.3em] text-accent uppercase">
           Paso 3 de 3
         </p>
-        <h1 className="mt-3 font-display text-5xl leading-[0.9] tracking-wide text-ink">
+        <h1
+          tabIndex={-1}
+          className="mt-3 outline-none font-display text-5xl leading-[0.9] tracking-wide text-ink">
           Tu semana
         </h1>
         <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-soft">
@@ -136,12 +180,25 @@ export function PasoSemana({ secciones }: PasoSemanaProps) {
       </div>
 
       {total === 0 && (
-        <p
+        <div
           role="status"
-          className="mb-6 rounded-card border border-line bg-surface p-5 text-center text-sm text-ink-soft"
+          className="mb-6 rounded-card border border-line bg-surface p-8 text-center shadow-soft"
         >
-          Tu semana está vacía. Añade ejercicios a cualquier día.
-        </p>
+          <span aria-hidden="true" className="block font-kanji text-5xl leading-none text-accent/15">
+            力
+          </span>
+          <p className="mt-4 font-display text-2xl tracking-wide text-ink">Semana vacía</p>
+          <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+            Quitaste todos los ejercicios. Añade los que quieras a cualquier día.
+          </p>
+          <Button
+            tamano="lg"
+            className="mt-6"
+            onClick={() => setDiaDestino(DIAS[0] ?? null)}
+          >
+            Añadir al lunes
+          </Button>
+        </div>
       )}
 
       <DndContext
@@ -159,7 +216,7 @@ export function PasoSemana({ secciones }: PasoSemanaProps) {
               dia={dia}
               ejercicios={semana[dia.id]}
               indice={indice.datos}
-              onQuitar={quitar}
+              onQuitar={alQuitar}
               onAgregar={setDiaDestino}
               arrastrando={arrastrado !== null}
             />

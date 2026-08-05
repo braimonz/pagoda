@@ -26,7 +26,9 @@ interface EstadoRutina {
   quitar: (uid: string) => void;
   /** Mueve una instancia a un día y posición. Sirve para reordenar y para cambiar de día. */
   mover: (uid: string, diaDestino: DiaId, indice: number) => void;
-  /** Sustituye la semana entera. La usa la importación desde un enlace. */
+  /** Devuelve una instancia a su día y posición. La usa "Deshacer". */
+  insertar: (dia: DiaId, indice: number, asignado: EjercicioAsignado) => void;
+  /** Sustituye la semana entera. La usan la importación y "Deshacer". */
   reemplazar: (semana: Semana) => void;
   vaciar: () => void;
 }
@@ -38,6 +40,17 @@ function semanaVacia(): Record<DiaId, readonly EjercicioAsignado[]> {
 /** En qué día está una instancia, o null si no está en la semana. */
 function diaDe(semana: Semana, uid: string): DiaId | null {
   return DIA_IDS.find((dia) => semana[dia].some((e) => e.uid === uid)) ?? null;
+}
+
+/** Dónde está exactamente una instancia. Lo necesita "Deshacer" para
+    devolverla a su sitio y no al final del día. */
+export function localizar(
+  semana: Semana,
+  uid: string,
+): { readonly dia: DiaId; readonly indice: number } | null {
+  const dia = diaDe(semana, uid);
+  if (dia === null) return null;
+  return { dia, indice: semana[dia].findIndex((e) => e.uid === uid) };
 }
 
 /**
@@ -129,6 +142,18 @@ export const useRutina = create<EstadoRutina>()((set) => ({
           ...estado.semana,
           [origen]: sinElMovido,
           [diaDestino]: [...destino.slice(0, posicion), movido, ...destino.slice(posicion)],
+        },
+      };
+    }),
+
+  insertar: (dia, indice, asignado) =>
+    set((estado) => {
+      const lista = estado.semana[dia];
+      const posicion = Math.max(0, Math.min(indice, lista.length));
+      return {
+        semana: {
+          ...estado.semana,
+          [dia]: [...lista.slice(0, posicion), asignado, ...lista.slice(posicion)],
         },
       };
     }),

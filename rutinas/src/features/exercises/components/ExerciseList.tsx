@@ -47,7 +47,11 @@ export function ExerciseList({ secciones }: ExerciseListProps) {
             variants={lista}
             initial="entra"
             animate="visible"
-            className="flex flex-col gap-3"
+            /* `content-visibility` deja que el navegador se salte el
+               cálculo de estilo y trazado de lo que queda fuera de la
+               pantalla. Con 45 fichas de tres grupos, el scroll pasa de
+               notarse a no notarse en gama baja. */
+            className="flex flex-col gap-3 [content-visibility:auto] [contain-intrinsic-size:auto_9rem]"
           >
             {seccion.ejercicios.map((ejercicio, indice) => (
               <ExerciseCard key={ejercicio.id} ejercicio={ejercicio} orden={indice + 1} />

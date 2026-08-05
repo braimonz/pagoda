@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -24,7 +25,7 @@ interface TarjetaAsignadaProps {
  * tarjeta entera arrastrase, en móvil no se podría hacer scroll por la
  * lista sin mover ejercicios sin querer.
  */
-export function TarjetaAsignada({ asignado, ejercicio, onQuitar }: TarjetaAsignadaProps) {
+function TarjetaAsignadaBase({ asignado, ejercicio, onQuitar }: TarjetaAsignadaProps) {
   const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform, transition, isDragging } =
     useSortable({ id: asignado.uid });
 
@@ -76,3 +77,8 @@ export function TarjetaAsignada({ asignado, ejercicio, onQuitar }: TarjetaAsigna
     </li>
   );
 }
+
+/* Memoizada: en la semana o en un catálogo de 45 fichas, un cambio de
+   estado en el padre repintaría todas. Cada tarjeta lee del store lo suyo
+   —un booleano—, así que solo se repinta la que de verdad cambia. */
+export const TarjetaAsignada = memo(TarjetaAsignadaBase);

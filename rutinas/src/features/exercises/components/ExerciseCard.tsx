@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 
 import { Chip } from '@/components/ui/Chip';
@@ -32,7 +33,7 @@ const COLOR_NIVEL: Record<Exercise['nivel'], string> = {
  * Mientras `imagen` venga vacía del catálogo, la baldosa lleva el número
  * de orden; al seleccionar, el número deja paso a la marca de verificación.
  */
-export function ExerciseCard({ ejercicio, orden }: ExerciseCardProps) {
+function ExerciseCardBase({ ejercicio, orden }: ExerciseCardProps) {
   const seleccionado = useEjercicioSeleccionado(ejercicio.id);
   const alternarEjercicio = useSeleccion((estado) => estado.alternarEjercicio);
 
@@ -93,3 +94,8 @@ export function ExerciseCard({ ejercicio, orden }: ExerciseCardProps) {
     </motion.button>
   );
 }
+
+/* Memoizada: en la semana o en un catálogo de 45 fichas, un cambio de
+   estado en el padre repintaría todas. Cada tarjeta lee del store lo suyo
+   —un booleano—, así que solo se repinta la que de verdad cambia. */
+export const ExerciseCard = memo(ExerciseCardBase);

@@ -21,7 +21,9 @@ export function PasoEjercicios({ grupos, secciones }: PasoEjerciciosProps) {
         <p className="font-accent text-[0.6875rem] font-extrabold tracking-[0.3em] text-accent uppercase">
           Paso 2 de 3
         </p>
-        <h1 className="mt-3 font-display text-5xl leading-none tracking-wide text-ink">
+        <h1
+          tabIndex={-1}
+          className="mt-3 outline-none font-display text-5xl leading-none tracking-wide text-ink">
           Ejercicios
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-ink-soft">

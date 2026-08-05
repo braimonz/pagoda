@@ -22,11 +22,24 @@ export const SUAVE: Curva = [0.16, 1, 0.3, 1];
 /** Un sobrepaso mínimo. Solo para confirmaciones, nunca para entradas. */
 export const REBOTE: Curva = [0.34, 1.56, 0.64, 1];
 
-/** Entrada de pantalla: sube 16 px mientras aparece. */
+/**
+ * Entrada de pantalla, con dirección.
+ *
+ * Avanzar entra desde abajo y sale hacia arriba; retroceder hace lo
+ * contrario. El sentido del movimiento le dice al socio si está yendo o
+ * volviendo sin tener que leer nada, que es lo que evita la sensación de
+ * perderse en un flujo de tres pasos.
+ *
+ * `custom` recibe 1 al avanzar y -1 al retroceder.
+ */
 export const pantalla: Variants = {
-  entra: { opacity: 0, y: 16 },
+  entra: (sentido: number = 1) => ({ opacity: 0, y: 16 * sentido }),
   visible: { opacity: 1, y: 0, transition: { duration: 0.28, ease: SUAVE } },
-  sale: { opacity: 0, y: -12, transition: { duration: 0.18, ease: SUAVE } },
+  sale: (sentido: number = 1) => ({
+    opacity: 0,
+    y: -12 * sentido,
+    transition: { duration: 0.18, ease: SUAVE },
+  }),
 };
 
 /**

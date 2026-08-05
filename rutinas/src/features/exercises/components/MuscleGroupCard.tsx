@@ -1,12 +1,15 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 
 import { cn } from '@/lib/cn';
 import { elemento, PULSACION, RAPIDA } from '@/lib/motion';
 import type { MuscleGroupSummary } from '@/services/exercises.service';
-import { useGrupoSeleccionado, useSeleccion } from '@/store/seleccion.store';
+import { useGrupoSeleccionado } from '@/store/seleccion.store';
 
 interface MuscleGroupCardProps {
   readonly grupo: MuscleGroupSummary;
+  /** Quien la usa decide qué pasa al tocarla: puede querer preguntar antes. */
+  readonly onAlternar: (grupo: MuscleGroupSummary) => void;
 }
 
 /**
@@ -19,9 +22,8 @@ interface MuscleGroupCardProps {
  * Lee su propio estado del store en lugar de recibirlo por props: así
  * tocar un grupo repinta esa tarjeta y no las ocho.
  */
-export function MuscleGroupCard({ grupo }: MuscleGroupCardProps) {
+function MuscleGroupCardBase({ grupo, onAlternar }: MuscleGroupCardProps) {
   const seleccionado = useGrupoSeleccionado(grupo.id);
-  const alternarGrupo = useSeleccion((estado) => estado.alternarGrupo);
 
   return (
     <motion.button
@@ -29,7 +31,7 @@ export function MuscleGroupCard({ grupo }: MuscleGroupCardProps) {
       variants={elemento}
       whileTap={PULSACION}
       aria-pressed={seleccionado}
-      onClick={() => alternarGrupo(grupo.id)}
+      onClick={() => onAlternar(grupo)}
       className={cn(
         'group relative flex aspect-square flex-col justify-end overflow-hidden',
         'rounded-card border p-4 text-left shadow-soft transition-colors duration-200',
@@ -82,3 +84,8 @@ export function MuscleGroupCard({ grupo }: MuscleGroupCardProps) {
     </motion.button>
   );
 }
+
+/* Memoizada: en la semana o en un catálogo de 45 fichas, un cambio de
+   estado en el padre repintaría todas. Cada tarjeta lee del store lo suyo
+   —un booleano—, así que solo se repinta la que de verdad cambia. */
+export const MuscleGroupCard = memo(MuscleGroupCardBase);

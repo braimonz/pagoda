@@ -45,7 +45,13 @@ export function BarraInferior({
     >
       <div className="pb-segura mx-auto flex max-w-screen-md items-center gap-4 px-5 pt-4">
         <div className="min-w-0 flex-1">
-          <p className="flex items-baseline gap-1.5 font-accent font-extrabold text-ink">
+          {/* El recuento cambia sin que nada más lo anuncie: `aria-live`
+              hace que un lector de pantalla lo diga al vuelo. */}
+          <p
+            aria-live="polite"
+            aria-atomic="true"
+            className="flex items-baseline gap-1.5 font-accent font-extrabold text-ink"
+          >
             <Contador valor={cantidad} className="text-2xl leading-none" />
             <span className="text-xs tracking-[0.16em] text-ink-soft uppercase">
               {cantidad === 1 ? singular : plural}

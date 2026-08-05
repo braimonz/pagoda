@@ -7,6 +7,7 @@ import { MuscleGroupCard } from './MuscleGroupCard';
 
 interface MuscleGroupListProps {
   readonly grupos: readonly MuscleGroupSummary[];
+  readonly onAlternar: (grupo: MuscleGroupSummary) => void;
 }
 
 /**
@@ -16,7 +17,7 @@ interface MuscleGroupListProps {
  * tres a partir de tablet. El escalonado lo dispara este contenedor; cada
  * tarjeta solo declara su variante.
  */
-export function MuscleGroupList({ grupos }: MuscleGroupListProps) {
+export function MuscleGroupList({ grupos, onAlternar }: MuscleGroupListProps) {
   if (grupos.length === 0) {
     return (
       <p role="status" className="py-16 text-center text-sm text-ink-mute">
@@ -33,7 +34,7 @@ export function MuscleGroupList({ grupos }: MuscleGroupListProps) {
       className="grid grid-cols-2 gap-3 sm:grid-cols-3"
     >
       {grupos.map((grupo) => (
-        <MuscleGroupCard key={grupo.id} grupo={grupo} />
+        <MuscleGroupCard key={grupo.id} grupo={grupo} onAlternar={onAlternar} />
       ))}
     </motion.div>
   );

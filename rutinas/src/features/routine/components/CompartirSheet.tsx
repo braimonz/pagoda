@@ -4,6 +4,7 @@ import { BotonEnlace, Button } from '@/components/ui/Button';
 import { IconoWhatsApp } from '@/components/ui/IconoWhatsApp';
 import { Sheet } from '@/components/ui/Sheet';
 import { useRutina } from '@/store/rutina.store';
+import { avisar } from '@/store/ui.store';
 
 import {
   crearEnlaceRutina,
@@ -37,10 +38,15 @@ export function CompartirSheet({ abierto, onCerrar }: CompartirSheetProps) {
     try {
       await navigator.clipboard.writeText(enlace);
       setCopiado(true);
+      avisar({ texto: 'Enlace copiado.', tono: 'exito', duracionMs: 2200 });
       window.setTimeout(() => setCopiado(false), 2200);
     } catch {
-      /* Sin permiso de portapapeles el enlace sigue a la vista y se puede
-         seleccionar a mano; no hay nada que avisar. */
+      /* El portapapeles puede estar bloqueado por permisos o por estar en
+         http plano. Se dice, en vez de dejar un botón que no hace nada. */
+      avisar({
+        texto: 'No se pudo copiar. Mantén pulsado el enlace para copiarlo a mano.',
+        tono: 'error',
+      });
     }
   }
 
